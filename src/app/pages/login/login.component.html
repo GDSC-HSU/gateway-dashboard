@@ -1,1 +1,66 @@
-<p>login works!</p>
+<nb-layout>
+    <nb-layout-column style="padding: 0;">
+        <div style="display: flex;">
+            <img class="img-background" src="../../../assets/imgs/Background-login.svg">
+            <div class="div-auth">
+                <img src="https://media.giphy.com/media/rWn4OKPz1958qweCYd/giphy.gif">
+                <nb-card>
+                    <nb-card-body>
+
+                        <nb-tabset fullWidth>
+                            <nb-tab tabTitle="Sign in">
+                                <div class="div-auth-layout">
+                                    <div>
+                                        <img class="img-logo" src="../../../assets/imgs/gateway.svg">
+                                    </div>
+                                    <div class="div-auth-content">
+                                        <div>
+                                            <label>Email:</label>
+                                            <input type="text" nbInput fullWidth status="primary" placeholder="Email">
+                                        </div>
+                                        <div>
+                                            <label>Password:</label>
+                                            <input type="text" nbInput fullWidth status="primary"
+                                                placeholder="Password">
+                                        </div>
+
+                                        <button nbButton fullWidth status="primary">Sign in</button>
+                                    </div>
+
+                                </div>
+
+                            </nb-tab>
+                            <nb-tab tabTitle="Register">
+                                <div class="div-auth-layout">
+                                    <div>
+                                        <img class="img-logo" src="../../../assets/imgs/gateway.svg">
+                                    </div>
+                                    <div class="div-auth-content">
+                                        <div>
+                                            <label>Display name:</label>
+                                            <input type="text" nbInput fullWidth status="primary" placeholder="Display name">
+                                        </div>
+                                        <div>
+                                            <label>Email:</label>
+                                            <input type="text" nbInput fullWidth status="primary" placeholder="Email">
+                                        </div>
+                                        <div>
+                                            <label>Password:</label>
+                                            <input type="text" nbInput fullWidth status="primary"
+                                                placeholder="Password">
+                                        </div>
+
+                                        <button nbButton fullWidth status="primary">Create account</button>
+                                    </div>
+
+                                </div>
+                            </nb-tab>
+                        </nb-tabset>
+
+                    </nb-card-body>
+                </nb-card>
+            </div>
+        </div>
+
+    </nb-layout-column>
+</nb-layout>
