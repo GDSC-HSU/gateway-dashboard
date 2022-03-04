@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "gdsc-gateway": {
+      "hosting": {
+        "gateway-dashboard": [
+          "gdsc-gateway"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "gdsc-gateway"
+  }
+}

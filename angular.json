@@ -106,6 +106,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "gateway-dashboard:build:production",
+            "firebaseProject": "gdsc-gateway",
+            "firebaseHostingSite": "gdsc-gateway"
+          }
         }
       }
     }
