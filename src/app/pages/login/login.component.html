@@ -1,66 +1,82 @@
 <nb-layout>
-    <nb-layout-column style="padding: 0;">
-        <div style="display: flex;">
-            <img class="img-background" src="../../../assets/imgs/Background-login.svg">
-            <div class="div-auth">
-                <img src="https://media.giphy.com/media/rWn4OKPz1958qweCYd/giphy.gif">
-                <nb-card>
-                    <nb-card-body>
+  <nb-layout-column style="padding: 0;">
+    <div style="display: flex;">
+      <img class="img-background" src="../../../assets/imgs/Background-login.svg">
+      <div class="div-auth">
+        <img src="https://media.giphy.com/media/rWn4OKPz1958qweCYd/giphy.gif">
+        <nb-card>
+          <nb-card-body>
 
-                        <nb-tabset fullWidth>
-                            <nb-tab tabTitle="Sign in">
-                                <div class="div-auth-layout">
-                                    <div>
-                                        <img class="img-logo" src="../../../assets/imgs/gateway.svg">
-                                    </div>
-                                    <div class="div-auth-content">
-                                        <div>
-                                            <label>Email:</label>
-                                            <input type="text" nbInput fullWidth status="primary" placeholder="Email">
-                                        </div>
-                                        <div>
-                                            <label>Password:</label>
-                                            <input type="text" nbInput fullWidth status="primary"
-                                                placeholder="Password">
-                                        </div>
+            <nb-tabset fullWidth >
+              <nb-tab tabTitle="Sign in" [active]="!isRegisterTab">
+                <div class="div-auth-layout">
+                  <div>
+                    <img class="img-logo" src="../../../assets/imgs/gateway.svg">
+                  </div>
+                  <div class="div-auth-content">
+                    <div>
+                      <label>Email:</label>
+                      <input [formControl]="emailControl" type="text" nbInput fullWidth status="primary"
+                        placeholder="Enter your email">
+                    </div>
+                    <div>
+                      <label>Password:</label>
+                      <nb-form-field>
+                        <input [type]="getInputType()" nbInput placeholder="Enter your password">
+                        <button nbSuffix nbButton ghost (click)="toggleShowPassword()">
+                          <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'"
+                                   pack="eva"
+                                   [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
+                          </nb-icon>
+                        </button>
+                      </nb-form-field>
+                    </div>
 
-                                        <button nbButton fullWidth status="primary">Sign in</button>
-                                    </div>
+                    <button class="button-main" *ngIf="!isLoading" (click)="loginClick()" nbButton fullWidth status="primary">Sign in</button>
+                    <button class="button-main" *ngIf="isLoading" nbButton fullWidth [nbSpinner]="true" nbSpinnerStatus="control"
+                      status="primary"> &nbsp;</button>
+                  </div>
 
-                                </div>
+                </div>
 
-                            </nb-tab>
-                            <nb-tab tabTitle="Register">
-                                <div class="div-auth-layout">
-                                    <div>
-                                        <img class="img-logo" src="../../../assets/imgs/gateway.svg">
-                                    </div>
-                                    <div class="div-auth-content">
-                                        <div>
-                                            <label>Display name:</label>
-                                            <input type="text" nbInput fullWidth status="primary" placeholder="Display name">
-                                        </div>
-                                        <div>
-                                            <label>Email:</label>
-                                            <input type="text" nbInput fullWidth status="primary" placeholder="Email">
-                                        </div>
-                                        <div>
-                                            <label>Password:</label>
-                                            <input type="text" nbInput fullWidth status="primary"
-                                                placeholder="Password">
-                                        </div>
+              </nb-tab>
+              <nb-tab tabTitle="Register">
+                <div class="div-auth-layout">
+                  <div>
+                    <img class="img-logo" src="../../../assets/imgs/gateway.svg">
+                  </div>
+                  <div class="div-auth-content">
+                    <!-- <div>
+                      <label>Display name:</label>
+                      <input type="text" nbInput fullWidth status="primary" placeholder="Display name">
+                    </div> -->
+                    <div>
+                      <label>Email:</label>
+                      <input [formControl]="emailControl" type="text" nbInput fullWidth status="primary" placeholder="Enter your email">
+                    </div>
+                    <div>
+                      <label>Password:</label>
+                      <input [formControl]="passwordControl" type="password" nbInput fullWidth status="primary" placeholder="Enter your password">
+                    </div>
+                    <div>
+                      <label>Confirm Password:</label>
+                      <input [formControl]="rePasswordControl" type="password" nbInput fullWidth status="primary" placeholder="Confirm your Password">
+                    </div>
 
-                                        <button nbButton fullWidth status="primary">Create account</button>
-                                    </div>
+                    <button class="button-main" *ngIf="!isLoading" nbButton fullWidth (click)="createAccountClick()" status="primary">
+                      Create account</button>
+                    <button class="button-main" *ngIf="isLoading" nbButton fullWidth [nbSpinner]="true" nbSpinnerStatus="control"
+                      status="primary"> &nbsp;</button>
+                  </div>
 
-                                </div>
-                            </nb-tab>
-                        </nb-tabset>
+                </div>
+              </nb-tab>
+            </nb-tabset>
 
-                    </nb-card-body>
-                </nb-card>
-            </div>
-        </div>
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
 
-    </nb-layout-column>
+  </nb-layout-column>
 </nb-layout>
