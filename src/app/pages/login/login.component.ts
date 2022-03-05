@@ -33,7 +33,8 @@ export class LoginComponent implements OnInit {
 
   @ViewChild(NbPopoverDirective) popover?: NbPopoverDirective;
   async createAccountClick() {
-    if(this.emailControl.invalid)
+
+    if(this.emailControl.errors)
     {
       this.popover?.show()
     }
@@ -87,4 +88,5 @@ export class LoginComponent implements OnInit {
   toggleShowPassword() {
     this.showPassword = !this.showPassword;
   }
+
 }
