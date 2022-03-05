@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NbToastrService } from '@nebular/theme';
+import { NbPopoverDirective, NbToastrService } from '@nebular/theme';
 import { LoginPageConstraintText } from 'src/app/contraints/text/loginpage.constraint.text';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -31,25 +31,32 @@ export class LoginComponent implements OnInit {
   isRegisterTab = true;
   showPassword = false;
 
-
+  @ViewChild(NbPopoverDirective) popover?: NbPopoverDirective;
   async createAccountClick() {
-    this.isLoading = true;
-
-    let user: User = {
-      email: this.emailControl.value,
-      password: this.passwordControl.value
+    if(this.emailControl.invalid)
+    {
+      this.popover?.show()
     }
+    
+    
+    
+    // this.isLoading = true;
 
-    await this.authService.createAccount(user)
-      .then(() => {
-        this.toastService.show(LoginPageConstraintText.createSuccessMess, LoginPageConstraintText.createSuccessTitle, { status: "success" });
-        this.isRegisterTab = false;
-        this.emailControl.setValue(user.email);
-      }).catch((e: Error) => {
-        this.toastService.show(e.message, LoginPageConstraintText.createFailureTitle, { status: "danger" });
-      });
+    // let user: User = {
+    //   email: this.emailControl.value,
+    //   password: this.passwordControl.value
+    // }
 
-    this.isLoading = false;
+    // await this.authService.createAccount(user)
+    //   .then(() => {
+    //     this.toastService.show(LoginPageConstraintText.createSuccessMess, LoginPageConstraintText.createSuccessTitle, { status: "success" });
+    //     this.isRegisterTab = false;
+    //     this.emailControl.setValue(user.email);
+    //   }).catch((e: Error) => {
+    //     this.toastService.show(e.message, LoginPageConstraintText.createFailureTitle, { status: "danger" });
+    //   });
+
+    // this.isLoading = false;
   }
 
   async loginClick() {
