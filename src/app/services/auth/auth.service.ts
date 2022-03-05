@@ -12,7 +12,7 @@ export class AuthService {
 
   createAccount(user: User) {
     return createUserWithEmailAndPassword(this.auth, user.email, user.password!).catch((e: Error)=>{
-      console.log(e.message);
+      throw Error(e.message);
     });
   }
 

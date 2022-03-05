@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 
   isLoading: boolean = false;
   isRegisterTab = true;
-  showPassword = true;
+  showPassword = false;
 
 
   async createAccountClick() {
@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
       .then(() => {
         this.toastService.show(LoginPageConstraintText.createSuccessMess, LoginPageConstraintText.createSuccessTitle, { status: "success" });
         this.isRegisterTab = false;
+        this.emailControl.setValue(user.email);
       }).catch((e: Error) => {
         this.toastService.show(e.message, LoginPageConstraintText.createFailureTitle, { status: "danger" });
       });
