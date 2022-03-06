@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NbPopoverDirective, NbToastrService } from '@nebular/theme';
+import { NbToastrService } from '@nebular/theme';
 import { LoginPageConstraintText } from 'src/app/contraints/text/loginpage.constraint.text';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { CustomValidator } from 'src/app/utils/customValidator';
 
 @Component({
   selector: 'app-login',
@@ -13,54 +14,56 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-
-  // displayNameControl = new FormControl();
-
   emailControl = new FormControl("", [Validators.required, Validators.email]);
-  passwordControl = new FormControl("", [Validators.required]);
-  rePasswordControl = new FormControl("", [Validators.required]);
+  passwordControl = new FormControl("", [Validators.required, Validators.minLength(6)]);
+  rePasswordControl = new FormControl("", [Validators.required,]);
 
 
-  constructor(private authService: AuthService, private toastService: NbToastrService, private router: Router) { }
+  constructor(private authService: AuthService, private toastService: NbToastrService, private router: Router) {
+    this.rePasswordControl.addValidators(CustomValidator.mustMatch(this.passwordControl, this.rePasswordControl));
+    this.rePasswordControl.updateValueAndValidity();
+  }
 
 
   ngOnInit(): void {
   }
 
   isLoading: boolean = false;
-  isRegisterTab = true;
+  isRegisterTab = false;
   showPassword = false;
 
-  @ViewChild(NbPopoverDirective) popover?: NbPopoverDirective;
   async createAccountClick() {
-
-    if(this.emailControl.errors)
-    {
-      this.popover?.show()
+    if (this.emailControl.invalid || this.passwordControl.invalid || this.rePasswordControl.invalid) {
+      this.emailControl.markAsTouched();
+      this.passwordControl.markAsTouched();
+      this.rePasswordControl.markAsTouched();
+      return;
     }
-    
-    
-    
-    // this.isLoading = true;
+    this.isLoading = true;
 
-    // let user: User = {
-    //   email: this.emailControl.value,
-    //   password: this.passwordControl.value
-    // }
+    let user: User = {
+      email: this.emailControl.value,
+      password: this.passwordControl.value
+    }
 
-    // await this.authService.createAccount(user)
-    //   .then(() => {
-    //     this.toastService.show(LoginPageConstraintText.createSuccessMess, LoginPageConstraintText.createSuccessTitle, { status: "success" });
-    //     this.isRegisterTab = false;
-    //     this.emailControl.setValue(user.email);
-    //   }).catch((e: Error) => {
-    //     this.toastService.show(e.message, LoginPageConstraintText.createFailureTitle, { status: "danger" });
-    //   });
+    await this.authService.createAccount(user)
+      .then(() => {
+        this.toastService.show(LoginPageConstraintText.createSuccessMess, LoginPageConstraintText.createSuccessTitle, { status: "success" });
+        this.isRegisterTab = false;
+        this.emailControl.setValue(user.email);
+      }).catch((e: Error) => {
+        this.toastService.show(e.message, LoginPageConstraintText.createFailureTitle, { status: "danger" });
+      });
 
-    // this.isLoading = false;
+    this.isLoading = false;
   }
 
   async loginClick() {
+    if (this.emailControl.invalid || this.passwordControl.invalid) {
+      this.emailControl.markAsTouched();
+      this.passwordControl.markAsTouched();
+      return;
+    }
     this.isLoading = true;
 
     let user: User = {
@@ -70,12 +73,11 @@ export class LoginComponent implements OnInit {
 
     await this.authService.login(user).then(() => {
       this.toastService.show(LoginPageConstraintText.loginSuccessMess, LoginPageConstraintText.loginSuccessTitle, { status: "success" });
+      this.router.navigate(["/dashboard"]);
     }).catch((e: Error) => {
       this.toastService.show(e.message, LoginPageConstraintText.loginFailureTitle);
     })
 
-    //this.isLoading = false;
-    this.router.navigate(["/dashboard"]);
   }
 
   getInputType() {
@@ -89,4 +91,46 @@ export class LoginComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
+  getStatus(formControl: FormControl) {
+    if ((formControl.dirty || formControl.touched) && formControl.invalid) {
+      return "danger";
+    }
+    return "basic";
+  }
+
+  getEmailError(): string {
+    if (this.emailControl.errors?.['required']) {
+      return "Email required!";
+    }
+    if (this.emailControl.errors?.["email"]) {
+      return "Email invalid!";
+    }
+    return "";
+  }
+
+  getPasswordError(): string {
+    if (this.passwordControl.errors?.['required']) {
+      return "Password required!";
+    }
+    if (this.passwordControl.errors?.["minlength"]) {
+      return "Must be at least 6 character";
+    }
+    return "";
+  }
+
+  getPasswordConfirmError(): string {
+    if (this.rePasswordControl.errors?.['mustMatch']) {
+      return "Confirm password not match!";
+    }
+    if (this.rePasswordControl.errors?.['required']) {
+      return "Confirm password required!";
+    }
+    return "";
+  }
+
+  onTabChange(){
+    this.emailControl.markAsUntouched();
+    this.passwordControl.markAsUntouched();
+    this.rePasswordControl.markAsUntouched();
+  }
 }

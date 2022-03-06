@@ -7,7 +7,7 @@
         <nb-card>
           <nb-card-body>
 
-            <nb-tabset fullWidth >
+            <nb-tabset fullWidth (changeTab)="onTabChange()">
               <nb-tab tabTitle="Sign in" [active]="!isRegisterTab">
                 <div class="div-auth-layout">
                   <div>
@@ -16,31 +16,38 @@
                   <div class="div-auth-content">
                     <div>
                       <label>Email:</label>
-                      <input [formControl]="emailControl" type="text" nbInput fullWidth status="primary"
-                        placeholder="Enter your email">
+                      <input [formControl]="emailControl" [status]="getStatus(emailControl)" type="text" nbInput fullWidth placeholder="Enter your email">
+                      <i class="error-mess"
+                        *ngIf="(this.emailControl.dirty || this.emailControl.touched) && this.emailControl.invalid">
+                        {{getEmailError()}}
+                      </i>
                     </div>
                     <div>
                       <label>Password:</label>
                       <nb-form-field>
-                        <input [type]="getInputType()" fullWidth nbInput placeholder="Enter your password">
+                        <input [type]="getInputType()" [status]="getStatus(passwordControl)" fullWidth nbInput placeholder="Enter your password">
                         <button nbSuffix nbButton ghost (click)="toggleShowPassword()">
-                          <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'"
-                                   pack="eva"
-                                   [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
+                          <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'" pack="eva"
+                            [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
                           </nb-icon>
                         </button>
                       </nb-form-field>
+                      <i class="error-mess"
+                        *ngIf="(this.passwordControl.dirty || this.passwordControl.touched) && this.passwordControl.invalid">
+                        {{getPasswordError()}}
+                      </i>
                     </div>
 
-                    <button class="button-main" *ngIf="!isLoading" (click)="loginClick()" nbButton fullWidth status="primary">Sign in</button>
-                    <button class="button-main" *ngIf="isLoading" nbButton fullWidth [nbSpinner]="true" nbSpinnerStatus="control"
-                      status="primary"> &nbsp;</button>
+                    <button class="button-main" *ngIf="!isLoading" (click)="loginClick()" nbButton fullWidth
+                      status="primary">Sign in</button>
+                    <button class="button-main" *ngIf="isLoading" nbButton fullWidth [nbSpinner]="true"
+                      nbSpinnerStatus="control" status="primary"> &nbsp;</button>
                   </div>
 
                 </div>
 
               </nb-tab>
-              <nb-tab tabTitle="Register" [active]="isRegisterTab">
+              <nb-tab tabTitle="Register" [active]="isRegisterTab" >
                 <div class="div-auth-layout">
                   <div>
                     <img class="img-logo" src="../../../assets/imgs/gateway.svg">
@@ -52,21 +59,39 @@
                     </div> -->
                     <div>
                       <label>Email:</label>
-                      <input [formControl]="emailControl" type="text" nbInput fullWidth status="primary" placeholder="Enter your email" nbInput nbPopover={{emailControl.errors}} nbPopoverPlacement="right" nbPopoverTrigger="noop">
+                      <input [formControl]="emailControl" [status]="getStatus(emailControl)" type="text" nbInput
+                        fullWidth placeholder="Enter your email" nbInput nbPopoverPlacement="right"
+                        nbPopoverTrigger="noop">
+                      <i class="error-mess"
+                        *ngIf="(this.emailControl.dirty || this.emailControl.touched) && this.emailControl.invalid">
+                        {{getEmailError()}}
+                      </i>
                     </div>
                     <div>
                       <label>Password:</label>
-                      <input [formControl]="passwordControl" type="password" nbInput fullWidth status="primary" placeholder="Enter your password">
+                      <input [formControl]="passwordControl" [status]="getStatus(passwordControl)" type="password"
+                        nbInput fullWidth nbPopoverPlacement="right" nbPopoverTrigger="noop"
+                        placeholder="Enter your password">
+                      <i class="error-mess"
+                        *ngIf="(this.passwordControl.dirty || this.passwordControl.touched) && this.passwordControl.invalid">
+                        {{getPasswordError()}}
+                      </i>
                     </div>
                     <div>
                       <label>Confirm Password:</label>
-                      <input [formControl]="rePasswordControl" type="password" nbInput fullWidth status="primary" placeholder="Confirm your Password">
+                      <input [formControl]="rePasswordControl" [status]="getStatus(rePasswordControl)" type="password"
+                        nbInput fullWidth placeholder="Confirm your Password">
+                      <i class="error-mess"
+                        *ngIf="(this.rePasswordControl.dirty || this.rePasswordControl.touched) && this.rePasswordControl.invalid">
+                        {{getPasswordConfirmError()}}
+                      </i>
                     </div>
 
-                    <button class="button-main" *ngIf="!isLoading" nbButton fullWidth (click)="createAccountClick()" status="primary">
+                    <button class="button-main" *ngIf="!isLoading" nbButton fullWidth (click)="createAccountClick()"
+                      status="primary">
                       Create account</button>
-                    <button class="button-main" *ngIf="isLoading" nbButton fullWidth [nbSpinner]="true" nbSpinnerStatus="control"
-                      status="primary"> &nbsp;</button>
+                    <button class="button-main" *ngIf="isLoading" nbButton fullWidth [nbSpinner]="true"
+                      nbSpinnerStatus="control" status="primary"> &nbsp;</button>
                   </div>
 
                 </div>

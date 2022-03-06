@@ -1,3 +1,5 @@
+@use '../../../themes.scss' as *;
+
 .div-auth{
     display: flex;
     flex-direction: column;
@@ -17,6 +19,9 @@
     justify-content: space-around;
     flex-direction: column;
 
+}
+span{
+    padding: 5px 2px 5px 2px;
 }
 
 .button-main{
@@ -41,4 +46,8 @@ nb-tab{
 
 input{
     margin-top: 5px;
+}
+
+.error-mess{
+    color: nb-theme(color-danger-focus);
 }
