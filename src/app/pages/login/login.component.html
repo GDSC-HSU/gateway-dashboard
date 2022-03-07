@@ -21,6 +21,10 @@
                         *ngIf="(this.emailControl.dirty || this.emailControl.touched) && this.emailControl.invalid">
                         {{getEmailError()}}
                       </i>
+                      <i class="error-mess"
+                      *ngIf="(!this.emailControl.dirty || !this.emailControl.touched) && this.emailControl.invalid">
+                      &nbsp;
+                    </i>
                     </div>
                     <div>
                       <label>Password:</label>
@@ -35,6 +39,10 @@
                       <i class="error-mess"
                         *ngIf="(this.passwordControl.dirty || this.passwordControl.touched) && this.passwordControl.invalid">
                         {{getPasswordError()}}
+                      </i>
+                      <i class="error-mess"
+                        *ngIf="(!this.passwordControl.dirty || !this.passwordControl.touched) && this.passwordControl.invalid">
+                        &nbsp;
                       </i>
                     </div>
 
@@ -66,6 +74,9 @@
                         *ngIf="(this.emailControl.dirty || this.emailControl.touched) && this.emailControl.invalid">
                         {{getEmailError()}}
                       </i>
+                      <i *ngIf="(!this.emailControl.dirty || !this.emailControl.touched) && this.emailControl.invalid">
+                        &nbsp;
+                      </i>
                     </div>
                     <div>
                       <label>Password:</label>
@@ -76,6 +87,9 @@
                         *ngIf="(this.passwordControl.dirty || this.passwordControl.touched) && this.passwordControl.invalid">
                         {{getPasswordError()}}
                       </i>
+                      <i *ngIf="(!this.passwordControl.dirty || !this.passwordControl.touched) && this.passwordControl.invalid">
+                        &nbsp;
+                      </i>
                     </div>
                     <div>
                       <label>Confirm Password:</label>
@@ -84,6 +98,9 @@
                       <i class="error-mess"
                         *ngIf="(this.rePasswordControl.dirty || this.rePasswordControl.touched) && this.rePasswordControl.invalid">
                         {{getPasswordConfirmError()}}
+                      </i>
+                      <i *ngIf="(!this.rePasswordControl.dirty || !this.rePasswordControl.touched) && this.rePasswordControl.invalid">
+                        &nbsp;
                       </i>
                     </div>
 
