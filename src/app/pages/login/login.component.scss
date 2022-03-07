@@ -1,0 +1,53 @@
+@use '../../../themes.scss' as *;
+
+.div-auth{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.div-auth-layout{
+    display: flex;
+}
+
+.div-auth-content{
+    height: 30vh;
+    width: 40vw;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+
+}
+span{
+    padding: 5px 2px 5px 2px;
+}
+
+.button-main{
+    margin-top: 10px;
+}
+.img-logo{
+    height: 20vw;
+}
+
+.img-background{
+    height: 100vh;
+}
+
+nb-card{
+    height: 50vh;
+    width: 60%;
+}
+
+nb-tab{
+    padding: 40px 20px 0 0;
+}
+
+input{
+    margin-top: 5px;
+}
+
+.error-mess{
+    color: nb-theme(color-danger-focus);
+}
