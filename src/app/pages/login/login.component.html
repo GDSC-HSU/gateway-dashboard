@@ -7,7 +7,7 @@
         <nb-card>
           <nb-card-body>
 
-            <nb-tabset fullWidth (changeTab)="onTabChange()">
+            <nb-tabset fullWidth (changeTab)="onTabChange($event)">
               <nb-tab tabTitle="Sign in" [active]="!isRegisterTab">
                 <div class="div-auth-layout">
                   <div>
@@ -25,7 +25,7 @@
                     <div>
                       <label>Password:</label>
                       <nb-form-field>
-                        <input [type]="getInputType()" [status]="getStatus(passwordControl)" fullWidth nbInput placeholder="Enter your password">
+                        <input [type]="getInputType()" [formControl]="passwordControl" [status]="getStatus(passwordControl)" fullWidth nbInput placeholder="Enter your password">
                         <button nbSuffix nbButton ghost (click)="toggleShowPassword()">
                           <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'" pack="eva"
                             [attr.aria-label]="showPassword ? 'hide password' : 'show password'">

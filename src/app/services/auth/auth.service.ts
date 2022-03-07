@@ -1,23 +1,38 @@
 import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { User } from 'src/app/models/user';
+import { FirebaseError } from 'firebase/app';
+import { signInWithEmailAndPassword, User} from 'firebase/auth';
+import { AppUser } from 'src/app/models/app-user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  user!: User | null;
+  constructor(private auth: Auth) {
+    this.auth.onAuthStateChanged(user => this.user = user);
+  }
 
-  constructor(private auth: Auth) { }
-
-  createAccount(user: User) {
-    return createUserWithEmailAndPassword(this.auth, user.email, user.password!).catch((e: Error)=>{
-      throw Error(e.message);
+  createAccount(user: AppUser) {
+    return createUserWithEmailAndPassword(this.auth, user.email, user.password!).catch((e: FirebaseError) => {
+      throw Error(e.code);
     });
   }
 
-  login(user: User) {
+  login(user: AppUser) {
     return signInWithEmailAndPassword(this.auth, user.email, user.password!);
+  }
+
+  isUserLogin(): Promise<boolean>{
+    return new Promise((resolve, reject) => {
+      this.auth.onAuthStateChanged((user) => {
+        if (user) {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
+    });
   }
 
 }

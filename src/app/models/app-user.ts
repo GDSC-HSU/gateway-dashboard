@@ -1,4 +1,4 @@
-export interface User{
+export interface AppUser{
     id?:string;
     displayName?: string;
     email: string;

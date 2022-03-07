@@ -3,9 +3,9 @@ import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NbToastrService } from '@nebular/theme';
 import { LoginPageConstraintText } from 'src/app/contraints/text/loginpage.constraint.text';
-import { User } from 'src/app/models/user';
+import { AppUser } from 'src/app/models/app-user';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { CustomValidator } from 'src/app/utils/customValidator';
+import { CustomValidator } from 'src/app/utils/custom-validator';
 
 @Component({
   selector: 'app-login',
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
     }
     this.isLoading = true;
 
-    let user: User = {
+    let user: AppUser = {
       email: this.emailControl.value,
       password: this.passwordControl.value
     }
@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
     }
     this.isLoading = true;
 
-    let user: User = {
+    let user: AppUser = {
       email: this.emailControl.value,
       password: this.passwordControl.value,
     }
@@ -74,6 +74,8 @@ export class LoginComponent implements OnInit {
     await this.authService.login(user).then(() => {
       this.toastService.show(LoginPageConstraintText.loginSuccessMess, LoginPageConstraintText.loginSuccessTitle, { status: "success" });
       this.router.navigate(["/dashboard"]);
+      this.passwordControl.setValue("");
+      this.rePasswordControl.setValue("");
     }).catch((e: Error) => {
       this.toastService.show(e.message, LoginPageConstraintText.loginFailureTitle);
     })
@@ -128,7 +130,12 @@ export class LoginComponent implements OnInit {
     return "";
   }
 
-  onTabChange(){
+  onTabChange(value: any) {
+    if (value.tabTitle == "Register") {
+      this.isRegisterTab = true;
+    } else {
+      this.isRegisterTab = false;
+    }
     this.emailControl.markAsUntouched();
     this.passwordControl.markAsUntouched();
     this.rePasswordControl.markAsUntouched();
