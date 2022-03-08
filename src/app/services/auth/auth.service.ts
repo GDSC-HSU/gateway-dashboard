@@ -20,7 +20,9 @@ export class AuthService {
   }
 
   login(user: AppUser) {
-    return signInWithEmailAndPassword(this.auth, user.email, user.password!);
+    return signInWithEmailAndPassword(this.auth, user.email, user.password!).then(user => {
+      console.log(user.user.getIdToken());
+    });
   }
 
   isUserLogin(): Promise<boolean>{

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-import { OrganizeComponent } from './pages/organize/organize.component';
 import { RouterModule } from '@angular/router';
 import { NbLayoutModule, NbSidebarModule, NbButtonModule, NbSidebarService, NbCardModule } from '@nebular/theme';
 
@@ -11,7 +10,6 @@ import { NbLayoutModule, NbSidebarModule, NbButtonModule, NbSidebarService, NbCa
 @NgModule({
   declarations: [
     DashboardComponent,
-    OrganizeComponent
   ],
   imports: [
     CommonModule,
