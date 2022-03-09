@@ -12,14 +12,19 @@ import { provideAnalytics, getAnalytics, ScreenTrackingService, UserTrackingServ
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { AuthGuard } from './services/auth/auth.guard';
-import { AuthService } from './services/auth/auth.service';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DragDropFileUploadDirective } from './directives/drag-drop-file-upload.directive';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
+
   ],
   imports: [
+    CommonModule,
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -35,6 +40,7 @@ import { AuthService } from './services/auth/auth.service';
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+    DragDropModule,
   ],
   providers: [
     ScreenTrackingService, UserTrackingService

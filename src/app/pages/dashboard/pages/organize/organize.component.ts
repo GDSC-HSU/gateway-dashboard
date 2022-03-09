@@ -11,7 +11,9 @@ export class OrganizeComponent implements OnInit {
 
   constructor(private dialogService: NbDialogService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.openWithoutBackdropClick();
+  }
 
   openWithoutBackdropClick() {
     this.open(false);

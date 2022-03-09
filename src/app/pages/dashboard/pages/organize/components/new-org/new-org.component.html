@@ -11,35 +11,35 @@
             </nb-step>
 
             <nb-step label="Create Your Organize">
-                <form class="create-form">
+                <form [formGroup]="myForm" class="create-form" >
                     <div class="left-form-div">
                         <div class="input-group">
                             <label>User ID:</label> <br>
-                            <input type="text" class="form-control" name="uid" required nbInput fullWidth disabled
-                                ngModel>
+                            <input type="text" class="form-control" name="uid" formControlName="uid" nbInput fullWidth readonly>
                         </div>
                         <div class="input-group">
                             <label>Organization ID:</label> <br>
-                            <input type="text" placeholder="Enter your organization ID" class="form-control" fullWidth
-                                name="name" required nbInput ngModel>
+                            <input type="text" placeholder="Enter your organization ID" formControlName="oid" class="form-control" fullWidth
+                                name="oid" nbInput>
                         </div>
                         <div class="input-group">
                             <label>Organization name:</label> <br>
-                            <input type="text" placeholder="Enter your organization name" fullWidth class="form-control"
-                                name="name" required nbInput ngModel>
+                            <input type="text" placeholder="Enter your organization name" formControlName="name" fullWidth class="form-control" name="name" nbInput>
                         </div>
                         <div style="display: flex; justify-content: end;">
-                            <button nbButton nbStepperNext status="primary">create</button>
+                            <button nbButton status="primary" (click)="this.onSubmit()">create</button>
                         </div>
 
                     </div>
                     <div class="right-form-div">
-                        <div >
-                            <input *ngIf="!filePath" id="file-upload" type="file" accept="image/*" (change)="imagePreview($event)" />
-                            <img *ngIf="filePath && filePath !== ''" class="img-upload" [src]="filePath" [alt]="myForm.value.name">
-                        </div>
+                        <img *ngIf="filePath && filePath !== ''" class="content-upload" [src]="filePath" [alt]="myForm.value.name">
+                        <input  hidden #fileUpload type="file" accept="image/*" (change)="imagePreview($event)" />
+                        <button class="content-upload" *ngIf="!filePath && filePath !== ''" appDragDropFileUpload (fileDropped)="dropImage($event)" (click)="uploadClick()" nbButton>
+                            <p>Drag and drop image to upload</p>
+                            
+                        </button>
                         <label #labelFileUpload for="file-upload" class="custom-file-upload">
-                            <button (click)="uploadClick()" nbButton status="primary">
+                            <button  (click)="uploadClick()" nbButton status="primary">
                                 <nb-icon icon="star"></nb-icon>
                                 Upload Background
                             </button>

@@ -7,15 +7,19 @@ import { RouterModule } from '@angular/router';
 import { NbLayoutModule, NbSidebarModule, NbButtonModule, NbSidebarService, NbCardModule, NbDialogModule, NbStepperModule, NbInputModule, NbIconModule } from '@nebular/theme';
 import { NewOrgComponent } from './pages/organize/components/new-org/new-org.component';
 import { OrganizeComponent } from './pages/organize/organize.component';
-
+import { DragDropFileUploadDirective } from 'src/app/directives/drag-drop-file-upload.directive';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     NewOrgComponent,
-    OrganizeComponent
+    OrganizeComponent,
+    DragDropFileUploadDirective,
   ],
   imports: [
+    ReactiveFormsModule,
+    FormsModule,
     CommonModule,
     DashboardRoutingModule,
     RouterModule, // RouterModule.forRoot(routes, { useHash: true }), if this is your app.module
@@ -26,7 +30,7 @@ import { OrganizeComponent } from './pages/organize/organize.component';
     NbDialogModule.forChild(),
     NbStepperModule,
     NbInputModule,
-    NbIconModule
+    NbIconModule,
   ],
   providers: [NbSidebarService,]
 })

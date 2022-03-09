@@ -14,7 +14,7 @@ nb-card{
     width: 45%;
     height: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     flex-direction: column;
     align-content: flex-end;
 }
@@ -23,13 +23,18 @@ nb-card{
     width: 45%;
     height: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     flex-direction: column;
     align-content: flex-end;
 }
 
-.img-upload{
-    width: 100%;
+.content-upload{
+    width: 95%;
+    height: 80%;
+}
+
+.input-group input{
+    margin-top: 7px;
 }
 
 // input[type="file"] {
