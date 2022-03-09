@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbGlobalPhysicalPosition, NbThemeModule, NbToastrModule } from '@nebular/theme';
+import { NbDialogModule, NbGlobalPhysicalPosition, NbThemeModule, NbToastrModule } from '@nebular/theme';
 import { StoreModule } from '@ngrx/store';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
@@ -28,6 +28,7 @@ import { AuthService } from './services/auth/auth.service';
       destroyByClick: true,
       position: NbGlobalPhysicalPosition.BOTTOM_RIGHT,
     }),
+    NbDialogModule.forRoot(),
     NbThemeModule.forRoot({ name: 'default' }),
     StoreModule.forRoot({}, {}),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

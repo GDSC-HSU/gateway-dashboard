@@ -1,0 +1,72 @@
+<nb-card accent="info">
+    <nb-card-header>Nebula</nb-card-header>
+    <nb-card-body>
+        <nb-stepper #stepper [linear]="true">
+            <nb-step label="Introduction">
+                <h2> Welcome to the gateway. </h2>
+                <p>
+                    Let's make contribution in the society which help restrain the spread of the covid pandemic.
+                </p>
+                <button nbButton status="primary" nbStepperNext>Let's go</button>
+            </nb-step>
+
+            <nb-step label="Create Your Organize">
+                <form class="create-form">
+                    <div class="left-form-div">
+                        <div class="input-group">
+                            <label>User ID:</label> <br>
+                            <input type="text" class="form-control" name="uid" required nbInput fullWidth disabled
+                                ngModel>
+                        </div>
+                        <div class="input-group">
+                            <label>Organization ID:</label> <br>
+                            <input type="text" placeholder="Enter your organization ID" class="form-control" fullWidth
+                                name="name" required nbInput ngModel>
+                        </div>
+                        <div class="input-group">
+                            <label>Organization name:</label> <br>
+                            <input type="text" placeholder="Enter your organization name" fullWidth class="form-control"
+                                name="name" required nbInput ngModel>
+                        </div>
+                        <div style="display: flex; justify-content: end;">
+                            <button nbButton nbStepperNext status="primary">create</button>
+                        </div>
+
+                    </div>
+                    <div class="right-form-div">
+                        <div >
+                            <input *ngIf="!filePath" id="file-upload" type="file" accept="image/*" (change)="imagePreview($event)" />
+                            <img *ngIf="filePath && filePath !== ''" class="img-upload" [src]="filePath" [alt]="myForm.value.name">
+                        </div>
+                        <label #labelFileUpload for="file-upload" class="custom-file-upload">
+                            <button (click)="uploadClick()" nbButton status="primary">
+                                <nb-icon icon="star"></nb-icon>
+                                Upload Background
+                            </button>
+                        </label>
+                       
+                    </div>
+
+
+                </form>
+            </nb-step>
+
+            <nb-step label="Congratulation">
+                <form class="step-container">
+                    <div class="input-group">
+                        <input type="text" placeholder="Enter something" class="form-control" name="something" required
+                            nbInput ngModel>
+                    </div>
+                    <button nbButton nbStepperNext>next</button>
+                </form>
+            </nb-step>
+
+            <nb-step [hidden]="true">
+                <div class="step-container">
+                    <h3>Wizard completed!</h3>
+                    <button nbButton (click)="stepper.reset()">Try again</button>
+                </div>
+            </nb-step>
+        </nb-stepper>
+    </nb-card-body>
+</nb-card>

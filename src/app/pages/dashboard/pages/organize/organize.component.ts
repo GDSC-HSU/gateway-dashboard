@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NbDialogService } from '@nebular/theme';
+import { NewOrgComponent } from './components/new-org/new-org.component';
 
 @Component({
   selector: 'app-organize',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrganizeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialogService: NbDialogService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  openWithoutBackdropClick() {
+    this.open(false);
   }
 
+  protected open(closeOnBackdropClick: boolean) {
+    this.dialogService.open(NewOrgComponent, { closeOnBackdropClick });
+  }
 }
