@@ -27,14 +27,14 @@
                             <input type="text" placeholder="Enter your organization name" formControlName="name" fullWidth class="form-control" name="name" nbInput>
                         </div>
                         <div style="display: flex; justify-content: end;">
-                            <button nbButton status="primary" (click)="this.onSubmit()">create</button>
+                            <button nbButton status="primary" (click)="this.onSubmit()" >create</button>
                         </div>
 
                     </div>
                     <div class="right-form-div">
                         <img *ngIf="filePath && filePath !== ''" class="content-upload" [src]="filePath" [alt]="myForm.value.name">
-                        <input  hidden #fileUpload type="file" accept="image/*" (change)="imagePreview($event)" />
-                        <button class="content-upload" *ngIf="!filePath && filePath !== ''" appDragDropFileUpload (fileDropped)="dropImage($event)" (click)="uploadClick()" nbButton>
+                        <input  hidden #fileUpload type="file" accept="image/*" (change)="dropImage($event, false)" />
+                        <button class="content-upload" *ngIf="!filePath && filePath !== ''" appDragDropFileUpload (fileDropped)="dropImage($event, true)" (click)="uploadClick()" nbButton>
                             <p>Drag and drop image to upload</p>
                             
                         </button>

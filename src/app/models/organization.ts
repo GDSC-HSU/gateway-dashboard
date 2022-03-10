@@ -1,5 +1,5 @@
 export interface Organization{
-    id: String;
-    name: String;
-    image: File;
+    id: string;
+    name: string;
+    image: Blob;
 }

@@ -1,9 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { Organization } from 'src/app/models/organization';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { OrganizationService } from 'src/app/services/organization/organization.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-new-org',
@@ -19,9 +21,8 @@ export class NewOrgComponent implements OnInit {
     oid: new FormControl(''),
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     file: new FormControl('', [Validators.required]),
-    fileSource: new FormControl('', [Validators.required])
   });;
-  constructor(private authService: AuthService, private organizationService: OrganizationService) {
+  constructor(private authService: AuthService, private organizationService: OrganizationService, private http: HttpClient) {
   }
 
 
@@ -29,26 +30,20 @@ export class NewOrgComponent implements OnInit {
     this.myForm.patchValue({ uid: this.authService.user!.uid });
   }
 
-  imagePreview(e: any) {
-    const file = e.target.files[0];
-
-    this.myForm.patchValue({
-      img: file
-    });
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.filePath = reader.result as string;
+  dropImage(files: any, isDrop: boolean) {
+    let file;
+    if (isDrop) {
+      file = files[0];
     }
-    reader.readAsDataURL(file)
-  }
-
-  dropImage(files: any) {
-    const file = files[0];
+    else {
+      file = files.target.files[0];
+    }
 
     this.myForm.patchValue({
       file: file
     });
+
+    this.myForm.get('file')!.updateValueAndValidity();
 
     const reader = new FileReader();
     reader.onload = () => {
@@ -61,12 +56,11 @@ export class NewOrgComponent implements OnInit {
   }
 
   async onSubmit() {
-    let organization: Organization = {
-      id: this.myForm.value.oid,
-      name: this.myForm.value.name,
-      image: this.myForm.value.file,
-    }
-    const firstNumber = await firstValueFrom(this.organizationService.saveOrganization(organization));
-    console.log(firstNumber);
+    let formData: FormData = new FormData();
+    formData.append("id", this.myForm.value.oid);
+    formData.append("name", this.myForm.value.name);
+    formData.append("image", this.myForm.value.file);
+    let response = await firstValueFrom(this.organizationService.saveOrganization(formData));
+    console.log(response);
   }
 }
