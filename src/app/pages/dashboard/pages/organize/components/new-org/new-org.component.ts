@@ -22,7 +22,7 @@ export class NewOrgComponent implements OnInit {
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     file: new FormControl('', [Validators.required]),
   });;
-  constructor(private authService: AuthService, private organizationService: OrganizationService, private http: HttpClient) {
+  constructor(private authService: AuthService, private organizationService: OrganizationService) {
   }
 
 

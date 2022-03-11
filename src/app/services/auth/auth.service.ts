@@ -9,7 +9,7 @@ import { AppUser } from 'src/app/models/app-user';
 })
 export class AuthService {
   user!: User | null;
-  token!: string | string[];
+  token!: string;
   constructor(private auth: Auth) {
     this.auth.onAuthStateChanged(user => {
       this.user = user
