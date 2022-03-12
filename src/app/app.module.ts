@@ -16,7 +16,11 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DragDropFileUploadDirective } from './directives/drag-drop-file-upload.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { LottieModule } from 'ngx-lottie';
 
+export function playerFactory() {
+  return import('lottie-web');
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +45,7 @@ import { CommonModule } from '@angular/common';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     DragDropModule,
+    LottieModule.forRoot({ player: playerFactory }),
   ],
   providers: [
     ScreenTrackingService, UserTrackingService

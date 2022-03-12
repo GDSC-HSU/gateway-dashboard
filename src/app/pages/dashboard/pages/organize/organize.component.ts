@@ -22,4 +22,5 @@ export class OrganizeComponent implements OnInit {
   protected open(closeOnBackdropClick: boolean) {
     this.dialogService.open(NewOrgComponent, { closeOnBackdropClick });
   }
+
 }

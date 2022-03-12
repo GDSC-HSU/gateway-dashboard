@@ -37,6 +37,9 @@ nb-card{
     margin-top: 7px;
 }
 
-// input[type="file"] {
-//     display: none;
-// }
+.congra-div{
+    height: 35vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

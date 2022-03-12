@@ -12,16 +12,15 @@ import { AuthService } from '../auth/auth.service';
 export class OrganizationService {
   prefix = "/organization";
 
-  headers = new HttpHeaders({ "token": this.authService.token, "api-x-key": "123" });
-
   constructor(private authService: AuthService, private http: HttpClient) {
   }
 
-  getOrganization()  {
+  getOrganization() {
     return this.http.get(environment.endpoint + this.prefix, {
-      headers: { "token": this.authService.token, "api-x-key": "123" }
+      headers: { "token": this.authService.token },
     });
   }
+
   saveOrganization(formData: FormData) {
     return this.http.post(environment.endpoint + this.prefix, formData, {
       headers: { "token": this.authService.token, "api-x-key": "123" }

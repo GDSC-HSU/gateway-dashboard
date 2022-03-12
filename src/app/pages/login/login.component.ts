@@ -81,9 +81,6 @@ export class LoginComponent implements OnInit {
       return;
     });
 
-    // this.passwordControl.setValue("");
-    // this.rePasswordControl.setValue("");
-
     this.orgService.getOrganization().subscribe({
       next: (value) => {
         this.router.navigate(["/dashboard/device"]);
@@ -92,7 +89,7 @@ export class LoginComponent implements OnInit {
         if (e.status == 400) {
           this.router.navigate(["/dashboard/organize"]);
         }
-      }
+      },
     });
   }
 
