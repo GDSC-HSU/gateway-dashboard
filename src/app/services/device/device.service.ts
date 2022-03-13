@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Firestore, FirestoreInstances, collection, onSnapshot, doc, DocumentData, CollectionReference, getDoc, DocumentSnapshot } from '@angular/fire/firestore';
+import { map, Observable, Observer, pipe } from 'rxjs';
+import { Device } from 'src/app/models/device';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
 
@@ -8,16 +11,28 @@ import { AuthService } from '../auth/auth.service';
 })
 export class DeviceService {
   prefix = "/device";
-
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  deviceStatusCollection: CollectionReference<DocumentData>;
+  constructor(private http: HttpClient, private authService: AuthService, private fireStore: Firestore) {
+    this.deviceStatusCollection = collection(this.fireStore, 'device_status');
+  }
 
   getDevices() {
-    return this.http.get(environment.endpoint + this.prefix, {
+    return this.http.get<Array<Device>>(environment.endpoint + this.prefix, {
       headers: {
         "token": this.authService.token,
         "api-x-key": environment.apiKey,
       }
     });
+  }
+
+  listenStatus(did: string, observer: Observer<DocumentSnapshot<DocumentData>>) {
+    let deviceDocument = doc(this.deviceStatusCollection, did);
+    onSnapshot(deviceDocument, observer);
+  }
+
+  checkCreated(did: string) {
+    let deviceDocument = doc(this.deviceStatusCollection, did);
+    return getDoc(deviceDocument);
   }
 
   createDevice() { }

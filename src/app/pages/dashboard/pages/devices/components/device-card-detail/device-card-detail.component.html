@@ -1,8 +1,8 @@
 <nb-card class="device-card-detail">
     <nb-card-body>
-        <nb-badge text="online" status="success" position="top right"></nb-badge>
-        <p><nb-icon icon="file-text-outline"></nb-icon> Truoc cong</p>
-        <p><nb-icon icon="hash-outline"></nb-icon> yTOeoqVfFe0Y9RrqD_rmC</p>
-        <p><nb-icon icon="pin-outline"></nb-icon> Chi Minh</p>
+        <nb-badge [text]="this.getTextStatus()" status="success" position="top right"></nb-badge>
+        <p><nb-icon icon="file-text-outline"></nb-icon> {{this.device!.name}}</p>
+        <p><nb-icon icon="hash-outline"></nb-icon> {{this.device!.id}}</p>
+        <p><nb-icon icon="pin-outline"></nb-icon> {{this.device!.location}}</p>
     </nb-card-body>
 </nb-card>
