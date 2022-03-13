@@ -1,0 +1,72 @@
+<nb-card accent="info">
+    <nb-card-header>Nebula</nb-card-header>
+    <nb-card-body>
+        <nb-stepper #stepper [linear]="true" [selectedIndex]="stepperIndex">
+            <nb-step label="Introduction">
+                <h2> Welcome to the gateway. </h2>
+                <p>
+                    Let's make contribution in the society which help restrain the spread of the covid pandemic.
+                </p>
+                <button nbButton status="primary" nbStepperNext>Let's go</button>
+            </nb-step>
+
+            <nb-step label="Create Your Organize">
+                <form [formGroup]="myForm" class="create-form">
+                    <div class="left-form-div">
+                        <div class="input-group">
+                            <label>User ID:</label> <br>
+                            <input type="text" class="form-control" name="uid" formControlName="uid" nbInput fullWidth
+                                readonly>
+                        </div>
+                        <div class="input-group">
+                            <label>Organization ID:</label> <br>
+                            <input type="text" placeholder="Enter your organization ID" formControlName="oid"
+                                class="form-control" fullWidth name="oid" nbInput>
+                        </div>
+                        <div class="input-group">
+                            <label>Organization name:</label> <br>
+                            <input type="text" placeholder="Enter your organization name" formControlName="name"
+                                fullWidth class="form-control" name="name" nbInput>
+                        </div>
+                        <div style="display: flex; justify-content: end;">
+                            <button nbButton status="primary" (click)="this.onSubmit()"
+                                [nbSpinner]="this.isCreateLoading" nbSpinnerStatus="basic">create</button>
+                        </div>
+                    </div>
+                    <div class="right-form-div">
+                        <img *ngIf="filePath && filePath !== ''" class="content-upload" [src]="filePath"
+                            [alt]="myForm.value.name">
+                        <input hidden #fileUpload type="file" accept="image/*" (change)="dropImage($event, false)" />
+                        <button class="content-upload" *ngIf="!filePath && filePath !== ''" appDragDropFileUpload
+                            (fileDropped)="dropImage($event, true)" (click)="uploadClick()" nbButton>
+                            <p>Drag and drop image to upload</p>
+                        </button>
+                        <label #labelFileUpload for="file-upload" class="custom-file-upload">
+                            <button (click)="uploadClick()" nbButton status="primary">
+                                <nb-icon icon="star"></nb-icon>
+                                Upload Background
+                            </button>
+                        </label>
+                    </div>
+                </form>
+            </nb-step>
+
+            <nb-step label="Congratulation">
+                <div class="congra-div">
+                    <div>
+                        <ng-lottie width="400px" height="400px" [options]="options"
+                         (animationCreated)="animationCreated($event)"></ng-lottie>
+                    </div>
+
+                    <div>
+                        <h3>Congratulation</h3>
+                        <p>Thank you for trust our</p>
+                        <button nbButton status="primary" (click)="letGoClick()">Let'go</button>
+                    </div>
+                </div>
+
+
+            </nb-step>
+        </nb-stepper>
+    </nb-card-body>
+</nb-card>

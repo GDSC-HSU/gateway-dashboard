@@ -1,21 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
-import { OrganizeComponent } from './pages/organize/organize.component';
 
 const routes: Routes = [
   {
-    path: '', component: DashboardComponent, children: [
+    path: '',
+    component: DashboardComponent, children: [
+      {
+        path: '',
+        redirectTo: 'device',
+        pathMatch: 'full'
+      },
       {
         path: 'device',
         loadChildren: () => import('./pages/devices/devices.module').then(m => m.DevicesModule)
       },
       {
-        path: 'organize',
-        component: OrganizeComponent
+        path: 'organization',
+        loadChildren: () => import('./pages/organization/organization.module').then(m => m.OrganizationModule)
       }
-    ]
-  }
+    ],
+  },
+  
 ];
 
 @NgModule({

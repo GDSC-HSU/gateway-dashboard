@@ -1,10 +1,13 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NbToastrService } from '@nebular/theme';
+import { firstValueFrom } from 'rxjs';
 import { LoginPageConstraintText } from 'src/app/contraints/text/loginpage.constraint.text';
 import { AppUser } from 'src/app/models/app-user';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { OrganizationService } from 'src/app/services/organization/organization.service';
 import { CustomValidator } from 'src/app/utils/custom-validator';
 
 @Component({
@@ -19,7 +22,7 @@ export class LoginComponent implements OnInit {
   rePasswordControl = new FormControl("", [Validators.required,]);
 
 
-  constructor(private authService: AuthService, private toastService: NbToastrService, private router: Router) {
+  constructor(private http: HttpClient, private authService: AuthService, private orgService: OrganizationService, private toastService: NbToastrService, private router: Router) {
     this.rePasswordControl.addValidators(CustomValidator.mustMatch(this.passwordControl, this.rePasswordControl));
     this.rePasswordControl.updateValueAndValidity();
   }
@@ -73,13 +76,21 @@ export class LoginComponent implements OnInit {
 
     await this.authService.login(user).then(() => {
       this.toastService.show(LoginPageConstraintText.loginSuccessMess, LoginPageConstraintText.loginSuccessTitle, { status: "success" });
-      this.router.navigate(["/dashboard"]);
-      this.passwordControl.setValue("");
-      this.rePasswordControl.setValue("");
     }).catch((e: Error) => {
       this.toastService.show(e.message, LoginPageConstraintText.loginFailureTitle);
-    })
+      return;
+    });
 
+    this.orgService.getOrganization().subscribe({
+      next: (value) => {
+        this.router.navigate(["/dashboard/device"]);
+      },
+      error: (e: HttpErrorResponse) => {
+        if (e.status == 400) {
+          this.router.navigate(["/dashboard/organization/create"]);
+        }
+      },
+    });
   }
 
   getInputType() {
@@ -141,3 +152,7 @@ export class LoginComponent implements OnInit {
     this.rePasswordControl.markAsUntouched();
   }
 }
+function next(next: any, arg1: (value: any) => void, erorr: any, arg3: (e: HttpErrorResponse) => void) {
+  throw new Error('Function not implemented.');
+}
+

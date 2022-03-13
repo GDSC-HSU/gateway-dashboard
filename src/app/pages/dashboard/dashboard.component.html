@@ -1,28 +1,11 @@
 <nb-layout>
-    <nb-layout-header fixed>Company Name</nb-layout-header>
+    <nb-layout-header fixed>GateWay</nb-layout-header>
 
-    <nb-sidebar>Sidebar Content</nb-sidebar>
+    <nb-sidebar>
+        <nb-menu [items]="items"></nb-menu>
+    </nb-sidebar>
 
     <nb-layout-column>
-        <nb-card>
-            <nb-card-header>Button Colors</nb-card-header>
-            <nb-card-body class="example-items-rows">
-              <button nbButton status="basic">basic</button>
-              <button nbButton status="primary">Primary</button>
-              <button nbButton status="success">Success</button>
-              <button nbButton status="info">Info</button>
-              <button nbButton status="warning">Warning</button>
-              <button nbButton status="danger">Danger</button>
-              <div class="control-status-example">
-                <button nbButton status="control">Control</button>
-              </div>
-              <div>
-                {{this.authService.user!.email}}
-              </div>
-            </nb-card-body>
-          </nb-card>
         <router-outlet></router-outlet>
     </nb-layout-column>
 </nb-layout>
-
-<!-- <router-outlet></router-outlet> -->

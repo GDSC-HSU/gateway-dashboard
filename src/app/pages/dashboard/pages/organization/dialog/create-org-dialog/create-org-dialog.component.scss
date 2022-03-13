@@ -1,0 +1,45 @@
+nb-card{
+    width: 55vw;
+    height: 60vh;
+}
+
+.create-form{
+    height: 35vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.left-form-div{
+    width: 45%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-content: flex-end;
+}
+
+.right-form-div{
+    width: 45%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-content: flex-end;
+}
+
+.content-upload{
+    width: 95%;
+    height: 80%;
+}
+
+.input-group input{
+    margin-top: 7px;
+}
+
+.congra-div{
+    height: 35vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
