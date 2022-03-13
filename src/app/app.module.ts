@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbDialogModule, NbGlobalPhysicalPosition, NbThemeModule, NbToastrModule } from '@nebular/theme';
+import { NbDialogModule, NbGlobalPhysicalPosition, NbMenuModule, NbThemeModule, NbToastrModule } from '@nebular/theme';
 import { StoreModule } from '@ngrx/store';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
@@ -37,6 +37,7 @@ export function playerFactory() {
       destroyByClick: true,
       position: NbGlobalPhysicalPosition.BOTTOM_RIGHT,
     }),
+    NbMenuModule.forRoot(),
     NbDialogModule.forRoot(),
     NbThemeModule.forRoot({ name: 'default' }),
     StoreModule.forRoot({}, {}),

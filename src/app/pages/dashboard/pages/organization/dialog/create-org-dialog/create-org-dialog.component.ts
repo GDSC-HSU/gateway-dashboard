@@ -1,22 +1,20 @@
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NbDialogRef } from '@nebular/theme';
+import { NbDialogRef, NbDialogService } from '@nebular/theme';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
-import { firstValueFrom } from 'rxjs';
-import { Organization } from 'src/app/models/organization';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { OrganizationService } from 'src/app/services/organization/organization.service';
-import { environment } from 'src/environments/environment';
+import { NewOrgComponent } from '../../components/new-org/new-org.component';
 
 @Component({
-  selector: 'app-new-org',
-  templateUrl: './new-org.component.html',
-  styleUrls: ['./new-org.component.scss']
+  selector: 'app-create-org-dialog',
+  templateUrl: './create-org-dialog.component.html',
+  styleUrls: ['./create-org-dialog.component.scss'] 
 })
-export class NewOrgComponent implements OnInit {
+export class CreateOrgDialogComponent implements OnInit {
 
   isCreateLoading = false;
   stepperIndex: number = 0;
@@ -32,14 +30,17 @@ export class NewOrgComponent implements OnInit {
     private authService: AuthService,
     private organizationService: OrganizationService,
     private router: Router,
-    public dialogRef: NbDialogRef<NewOrgComponent>
-    ) {
+    public dialogRef: NbDialogRef<NewOrgComponent>,
+  ) {
   }
 
 
   ngOnInit(): void {
+   
     this.myForm.patchValue({ uid: this.authService.user!.uid });
   }
+
+ 
 
   dropImage(files: any, isDrop: boolean) {
     let file;

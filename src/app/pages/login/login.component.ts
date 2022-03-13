@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
       },
       error: (e: HttpErrorResponse) => {
         if (e.status == 400) {
-          this.router.navigate(["/dashboard/organize"]);
+          this.router.navigate(["/dashboard/organization/create"]);
         }
       },
     });
