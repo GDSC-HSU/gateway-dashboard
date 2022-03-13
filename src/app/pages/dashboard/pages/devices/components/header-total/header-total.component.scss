@@ -3,6 +3,11 @@
     justify-content: space-between;
 }
 
+.header-card{
+    width: 17vw;
+    margin-bottom: 5vh;
+}
+
 .header-total-content {
     display: flex;
     height: 12vh;
@@ -22,7 +27,7 @@
     justify-content: center;
 }
 
-h4, p {
+h5, p {
     margin: 0;
 }
 

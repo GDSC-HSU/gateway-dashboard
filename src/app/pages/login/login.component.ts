@@ -76,20 +76,20 @@ export class LoginComponent implements OnInit {
 
     await this.authService.login(user).then(() => {
       this.toastService.show(LoginPageConstraintText.loginSuccessMess, LoginPageConstraintText.loginSuccessTitle, { status: "success" });
+      this.orgService.getOrganization().subscribe({
+        next: (value) => {
+          this.router.navigate(["/dashboard/device"]);
+        },
+        error: (e: HttpErrorResponse) => {
+          if (e.status == 400) {
+            this.router.navigate(["/dashboard/organization/create"]);
+          }
+        },
+      });
     }).catch((e: Error) => {
-      this.toastService.show(e.message, LoginPageConstraintText.loginFailureTitle);
+      this.toastService.show(e.message, LoginPageConstraintText.loginFailureTitle, {status: "danger"});
+      this.isLoading = false;
       return;
-    });
-
-    this.orgService.getOrganization().subscribe({
-      next: (value) => {
-        this.router.navigate(["/dashboard/device"]);
-      },
-      error: (e: HttpErrorResponse) => {
-        if (e.status == 400) {
-          this.router.navigate(["/dashboard/organization/create"]);
-        }
-      },
     });
   }
 

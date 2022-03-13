@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { DevicesRoutingModule } from './devices-routing.module';
 import { DevicesComponent } from './devices.component';
-import { NbButton, NbButtonModule, NbCardModule, NbIconModule } from '@nebular/theme';
+import { NbBadgeModule, NbButton, NbButtonModule, NbCardModule, NbIconModule } from '@nebular/theme';
 import { HeaderTotalComponent } from './components/header-total/header-total.component';
 import { DeviceCardComponent } from './components/device-card/device-card.component';
 import { LogsComponent } from './components/logs/logs.component';
+import { DeviceCardDetailComponent } from './components/device-card-detail/device-card-detail.component';
 
 
 @NgModule({
@@ -14,14 +15,16 @@ import { LogsComponent } from './components/logs/logs.component';
     DevicesComponent,
     HeaderTotalComponent,
     DeviceCardComponent,
-    LogsComponent
+    LogsComponent,
+    DeviceCardDetailComponent
   ],
   imports: [
     CommonModule,
     DevicesRoutingModule,
     NbCardModule,
     NbButtonModule,
-    NbIconModule
+    NbIconModule,
+    NbBadgeModule,
   ]
 })
 export class DevicesModule { }
