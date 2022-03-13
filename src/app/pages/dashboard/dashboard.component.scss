@@ -1,0 +1,50 @@
+::ng-deep{
+    nb-layout-column{
+        padding: 0 0 0 0 !important;
+        background-color: #f9f8fb;
+    }
+    nb-menu .menu-item{
+        border: none !important;
+    }
+
+    nb-user{
+        margin-bottom: 5vh;
+    }
+}
+
+.container{
+    display: flex;
+    height: 100%;
+}
+
+.side-bar{
+    height: 100%;
+    padding: 5vh 3vw 0 2vw;
+    background-color: white;
+    height: 100%;
+}
+
+.content{
+    padding: 5vh;
+    height: 100%;
+    width: 100%;
+}
+
+.welcome{
+    height: 15%;
+}
+
+.content-main{
+    height: 85%;
+}
+
+
+
+h1, h2, h3, h4, h5, h6{
+    margin: 0;
+}
+
+p{
+    margin: 10px 0 0 0;
+}
+

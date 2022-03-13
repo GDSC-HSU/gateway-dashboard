@@ -1,11 +1,23 @@
 <nb-layout>
-    <nb-layout-header fixed>GateWay</nb-layout-header>
-
-    <nb-sidebar>
-        <nb-menu [items]="items"></nb-menu>
-    </nb-sidebar>
-
     <nb-layout-column>
-        <router-outlet></router-outlet>
+        <div class="container">
+            <div class="side-bar">
+                <nb-user size="large" name="User" title="Admin">
+                </nb-user>
+                <nb-menu [items]="items"></nb-menu>
+            </div>
+            <div class="content">
+                <div class="welcome">
+                    <h2>Welcome, User</h2>
+                    <p>Here you can manage your device</p>
+                </div>
+                <div class="content-main">
+                    <router-outlet></router-outlet>
+                </div>
+                
+            </div>
+
+        </div>
+
     </nb-layout-column>
 </nb-layout>
