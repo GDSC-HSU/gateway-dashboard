@@ -47,10 +47,6 @@ export class DeviceService {
     let deviceDocument = doc(this.deviceStatusCollection, did);
     return getDoc(deviceDocument);
   }
-
-  listenConnectDevice(observer: Observer<QuerySnapshot<DocumentData>>) {
-      onSnapshot(this.deviceStatusCollection, observer);
-  }
   
   createDevice() { }
 }

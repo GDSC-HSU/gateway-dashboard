@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DocumentData, QueryDocumentSnapshot, QuerySnapshot } from 'firebase/firestore';
+import { Firestore } from '@angular/fire/firestore';
+import { collection, DocumentData, onSnapshot, QueryDocumentSnapshot, QuerySnapshot } from 'firebase/firestore';
 import { DeviceStatus } from 'src/app/models/device_status';
 import { DeviceService } from 'src/app/services/device/device.service';
 
@@ -12,19 +13,19 @@ export class HeaderTotalComponent implements OnInit {
   totalConnect = 0;
   totalDisconnect = 0;
 
-  constructor(public deviceService: DeviceService) { }
-  observerConnect = {
-    next: (value: QuerySnapshot<DocumentData>) => {
-      this.countConnect(value.docs);
-    },
-    error: () => { },
-    complete: () => { }
-  }
+  constructor(public deviceService: DeviceService, private fireStore: Firestore) { }
 
   ngOnInit(): void {
-    this.deviceService.listenConnectDevice(this.observerConnect);
+    this.listenDeviceCount();
   }
 
+  listenDeviceCount() {
+    onSnapshot(collection(this.fireStore, "device_status"), {
+      next: (value: QuerySnapshot<DocumentData>) => {
+        this.countConnect(value.docs);
+      },
+    })
+  }
   countConnect(array: Array<QueryDocumentSnapshot<DocumentData>>) {
     let countConnect = 0;
     let countDisconnect = 0;
