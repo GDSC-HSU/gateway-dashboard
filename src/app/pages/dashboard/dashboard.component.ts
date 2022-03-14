@@ -10,7 +10,8 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class DashboardComponent implements OnInit {
 
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService) { 
+  }
 
   ngOnInit(): void {}
 

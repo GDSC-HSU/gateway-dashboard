@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DeviceService } from 'src/app/services/device/device.service';
 
 @Component({
   selector: 'app-devices',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DevicesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private deviceService: DeviceService) { }
 
   ngOnInit(): void {
+    this.getAllDevices();
+  }
+
+  getAllDevices() {
+    this.deviceService.getDevices().subscribe(value => {
+      this.deviceService.devices = value;
+    })
   }
 
 }

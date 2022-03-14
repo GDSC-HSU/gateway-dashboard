@@ -1,0 +1,31 @@
+
+nb-card-body {
+    padding: 0;
+}
+
+.main-card-device {
+    height: 55.5vh;
+    margin: 0;
+}
+
+.main-card-device-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+b {
+    vertical-align: middle;
+}
+
+.title-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-card-content {
+    padding: 3.5vh;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    row-gap: 5vh;
+}

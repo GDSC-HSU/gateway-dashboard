@@ -1,0 +1,22 @@
+<nb-card class="main-card-device">
+    <nb-card-header>
+        <div class="main-card-device-header">
+            <div class="title-card">
+                <b>
+                    Devices
+                </b>
+            </div>
+            <button nbButton status="primary">
+                <nb-icon icon="plus-outline"></nb-icon>
+                new device
+            </button>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="main-card-content">
+            <app-device-card-detail [device]="item" *ngFor="let item of this.deviceService.devices" ></app-device-card-detail>
+        </div>
+        
+        
+    </nb-card-body>
+</nb-card>

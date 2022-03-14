@@ -1,0 +1,59 @@
+<div class="header-layout">
+    <nb-card accent="info" class="header-card" >
+        <nb-card-body>
+            <div class="header-total-content" >
+                <div class="header-total-button">
+                    <button nbButton outline size="giant" status="primary">
+                    <nb-icon icon="layers-outline"></nb-icon>
+                </button>
+                </div>
+                
+                <div class="header-total-text">
+                    <h5>
+                        {{this.deviceService.devices.length}} Devices
+                    </h5>
+                    <p class="total-text">Total devices</p>
+                </div>
+
+            </div>
+        </nb-card-body>
+    </nb-card>
+    <nb-card accent="success" class="header-card" >
+        <nb-card-body>
+            <div class="header-total-content" >
+                <div class="header-total-button">
+                    <button nbButton outline size="giant" status="success">
+                    <nb-icon icon="checkmark-circle-2-outline"></nb-icon>
+                </button>
+                </div>
+                
+                <div class="header-total-text">
+                    <h5>
+                        {{this.totalConnect}} Devices
+                    </h5>
+                    <p class="total-text">Connecting devices</p>
+                </div>
+
+            </div>
+        </nb-card-body>
+    </nb-card>
+    <nb-card accent="danger" class="header-card" >
+        <nb-card-body>
+            <div class="header-total-content" >
+                <div class="header-total-button">
+                    <button nbButton outline size="giant" status="danger">
+                    <nb-icon icon="slash-outline"></nb-icon>
+                </button>
+                </div>
+                
+                <div class="header-total-text">
+                    <h5>
+                        {{this.totalDisconnect}} Devices
+                    </h5>
+                    <p class="total-text">Disconnect devices</p>
+                </div>
+
+            </div>
+        </nb-card-body>
+    </nb-card>
+</div>
