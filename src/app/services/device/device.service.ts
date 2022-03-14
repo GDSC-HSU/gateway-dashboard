@@ -1,7 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Firestore, FirestoreInstances, collection, onSnapshot, doc, DocumentData, CollectionReference, getDoc, DocumentSnapshot } from '@angular/fire/firestore';
-import { map, Observable, Observer, pipe } from 'rxjs';
+import {
+  Firestore,
+  collection,
+  onSnapshot,
+  doc,
+  DocumentData,
+  CollectionReference,
+  getDoc,
+  DocumentSnapshot,
+  query,
+  QuerySnapshot
+} from '@angular/fire/firestore';
+import { Observer } from 'rxjs';
 import { Device } from 'src/app/models/device';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
@@ -12,6 +23,8 @@ import { AuthService } from '../auth/auth.service';
 export class DeviceService {
   prefix = "/device";
   deviceStatusCollection: CollectionReference<DocumentData>;
+  devices: Array<Device> = [];
+
   constructor(private http: HttpClient, private authService: AuthService, private fireStore: Firestore) {
     this.deviceStatusCollection = collection(this.fireStore, 'device_status');
   }
@@ -35,5 +48,9 @@ export class DeviceService {
     return getDoc(deviceDocument);
   }
 
+  listenConnectDevice(observer: Observer<QuerySnapshot<DocumentData>>) {
+      onSnapshot(this.deviceStatusCollection, observer);
+  }
+  
   createDevice() { }
 }

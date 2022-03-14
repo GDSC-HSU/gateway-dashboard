@@ -8,18 +8,9 @@ import { DeviceService } from 'src/app/services/device/device.service';
   styleUrls: ['./device-card.component.scss']
 })
 export class DeviceCardComponent implements OnInit {
-  isLoading: boolean = false;
-  devices: Array<Device> = [];
-  constructor(private deviceService: DeviceService) { }
+  constructor(public deviceService: DeviceService) { }
   ngOnInit(): void {
-    this.getAllDevices();
   }
 
-  getAllDevices() {
-    this.isLoading = true;
-    this.deviceService.getDevices().subscribe(value => {
-      this.devices = value;
-      this.isLoading = false;
-    })
-  }
+  
 }

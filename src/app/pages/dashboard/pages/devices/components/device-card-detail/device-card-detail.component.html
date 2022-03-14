@@ -1,8 +1,10 @@
 <nb-card class="device-card-detail">
     <nb-card-body>
-        <nb-badge [text]="this.getTextStatus()" status="success" position="top right"></nb-badge>
-        <p><nb-icon icon="file-text-outline"></nb-icon> {{this.device!.name}}</p>
-        <p><nb-icon icon="hash-outline"></nb-icon> {{this.device!.id}}</p>
         <p><nb-icon icon="pin-outline"></nb-icon> {{this.device!.location}}</p>
+        <nb-badge [text]="this.getTextStatus()" status="{{this.getStatus()}}" position="top right"></nb-badge>
+            <p><nb-icon icon="file-text-outline"></nb-icon> {{this.device!.name}}</p>
+        <p nbTooltip="{{this.device!.id}}"><nb-icon icon="hash-outline"></nb-icon> {{this.device!.id?.substring(0,10)}}</p>
+        
+        
     </nb-card-body>
 </nb-card>

@@ -23,7 +23,6 @@ export class DeviceCardDetailComponent implements OnInit {
   observerStatus = {
     next: (value: DocumentSnapshot<DocumentData>) => {
       let deviceStatus = value.data();
-      console.log(deviceStatus!["status"])
       if (deviceStatus!["status"]) {
         this.status = DeviceStatus.connected;
       }
@@ -54,6 +53,16 @@ export class DeviceCardDetailComponent implements OnInit {
       return "offline";
     }
     return "pending";
+  }
+
+  getStatus(){
+    if (this.status == DeviceStatus.connected) {
+      return "success";
+    }
+    else if (this.status == DeviceStatus.disconnected) {
+      return "danger";
+    }
+    return "warning";
   }
 
 }
