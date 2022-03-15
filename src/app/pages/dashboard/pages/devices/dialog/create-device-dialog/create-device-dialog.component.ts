@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NbPopoverDirective, NbTagComponent, NbTagInputAddEvent } from '@nebular/theme';
+import { Device } from 'src/app/models/device';
+import { DeviceService } from 'src/app/services/device/device.service';
 
 @Component({
   selector: 'app-create-device-dialog',
@@ -8,12 +11,16 @@ import { NbPopoverDirective, NbTagComponent, NbTagInputAddEvent } from '@nebular
 })
 export class CreateDeviceDialogComponent implements OnInit {
 
-  qrCodeString: string = '"id": "850PVltBVccOV1JTKg4i","accessKey": "thHknCr-Ibt9Gc7T0iNIs","apiKey": "123","oid": "Cao1-ORG","endpoint": "https://gdsc-hsu.xyz","mqttUserName": "GDSCHSU","mqttPassword": "Mailaanhem123"';
-
-  constructor() { }
+  qrCodeString?: string;
+  deviceCreateFromGroup: FormGroup = new FormGroup({
+    nameControl: new FormControl('', [Validators.required]),
+    locationControl: new FormControl('', [Validators.required]),
+    tagControl: new FormControl('')
+  })
+  constructor(private deviceService: DeviceService) { }
 
   ngOnInit(): void {
-    
+
   }
 
   trees: Set<string> = new Set([]);
@@ -29,6 +36,14 @@ export class CreateDeviceDialogComponent implements OnInit {
     input.nativeElement.value = '';
   }
 
-  createClick(){
+  createClick() {
+    let device: Device = {
+      name: this.deviceCreateFromGroup.get('nameControl')!.value,
+      location: this.deviceCreateFromGroup.get("locationControl")!.value,
+      tag: this.deviceCreateFromGroup.get("tagControl")!.value
+    }
+    this.deviceService.createDevice(device).subscribe(value => {
+      this.qrCodeString = JSON.stringify(value)
+    });
   }
 }

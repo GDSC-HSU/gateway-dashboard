@@ -4,31 +4,31 @@
     </nb-card-header>
     <nb-card-body>
         <div class="main-content">
-            <div class="left-content">
+            <form [formGroup]="this.deviceCreateFromGroup" class="left-content">
                 <div>
                     <label>Name</label>
-                    <input type="text" nbInput fullWidth>
+                    <input type="text" nbInput fullWidth formControlName="nameControl">
                 </div>
 
                 <div>
                     <label>Location</label>
-                    <input type="text" nbInput fullWidth>
+                    <input type="text" nbInput fullWidth formControlName="locationControl">
                 </div>
 
                 <div>
                     <label>Tags</label>
                     <nb-tag-list (tagRemove)="onTagRemove($event)">
                         <nb-tag *ngFor="let tree of trees" [text]="tree" removable></nb-tag>
-                        <input type="text" nbTagInput (tagAdd)="onTagAdd($event)" fullWidth>
+                        <input type="text" nbTagInput (tagAdd)="onTagAdd($event)" fullWidth formControlName="tagControl">
                     </nb-tag-list>
                 </div>
 
                 <div class="button-align-right">
                     <button nbButton status="primary" (click)="createClick()">Create</button>
                 </div>
-            </div>
+            </form>
             <div nbPopover="Scan this QR for connect your device" nbPopoverTrigger="noop"  class="right-content">
-                <qrcode [qrdata]="this.qrCodeString" [width]="400" [errorCorrectionLevel]="'M'"></qrcode>
+                <qrcode [qrdata]="this.qrCodeString!" [width]="400" [errorCorrectionLevel]="'M'"></qrcode>
             </div>
         </div>
     </nb-card-body>

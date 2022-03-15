@@ -47,6 +47,13 @@ export class DeviceService {
     let deviceDocument = doc(this.deviceStatusCollection, did);
     return getDoc(deviceDocument);
   }
-  
-  createDevice() { }
+
+  createDevice(device: Device) {
+    return this.http.post(environment.endpoint + this.prefix + "/did-new", device, {
+      headers: {
+        "token": this.authService.token,
+        "api-x-key": environment.apiKey,
+      },
+    })
+  }
 }

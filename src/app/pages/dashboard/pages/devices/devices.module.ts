@@ -10,6 +10,7 @@ import { LogsComponent } from './components/logs/logs.component';
 import { DeviceCardDetailComponent } from './components/device-card-detail/device-card-detail.component';
 import { CreateDeviceDialogComponent } from './dialog/create-device-dialog/create-device-dialog.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,6 +23,8 @@ import { QRCodeModule } from 'angularx-qrcode';
     CreateDeviceDialogComponent
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     DevicesRoutingModule,
     NbCardModule,
