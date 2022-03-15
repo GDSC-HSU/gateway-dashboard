@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NbTagComponent, NbTagInputAddEvent } from '@nebular/theme';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NbPopoverDirective, NbTagComponent, NbTagInputAddEvent } from '@nebular/theme';
 
 @Component({
   selector: 'app-create-device-dialog',
@@ -8,9 +8,12 @@ import { NbTagComponent, NbTagInputAddEvent } from '@nebular/theme';
 })
 export class CreateDeviceDialogComponent implements OnInit {
 
+  qrCodeString: string = '"id": "850PVltBVccOV1JTKg4i","accessKey": "thHknCr-Ibt9Gc7T0iNIs","apiKey": "123","oid": "Cao1-ORG","endpoint": "https://gdsc-hsu.xyz","mqttUserName": "GDSCHSU","mqttPassword": "Mailaanhem123"';
+
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
   trees: Set<string> = new Set([]);
@@ -26,4 +29,6 @@ export class CreateDeviceDialogComponent implements OnInit {
     input.nativeElement.value = '';
   }
 
+  createClick(){
+  }
 }

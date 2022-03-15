@@ -9,6 +9,7 @@ import { DeviceCardComponent } from './components/device-card/device-card.compon
 import { LogsComponent } from './components/logs/logs.component';
 import { DeviceCardDetailComponent } from './components/device-card-detail/device-card-detail.component';
 import { CreateDeviceDialogComponent } from './dialog/create-device-dialog/create-device-dialog.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { CreateDeviceDialogComponent } from './dialog/create-device-dialog/creat
     NbBadgeModule,
     NbTooltipModule,
     NbTagModule,
-    NbInputModule
+    NbInputModule,
+    QRCodeModule,
   ]
 })
 export class DevicesModule { }

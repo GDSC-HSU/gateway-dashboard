@@ -1,5 +1,5 @@
 nb-card{
-    width: 45vw;
+    width: 50vw;
     height: 60vh;
 }
 
@@ -13,9 +13,11 @@ div input{
     justify-content: space-between;
     width: 100%;
     height: 100%;
+    padding-top: 5%;
 }
 
 .left-content{
+    height: 80%;
     width: 40%;
     display: flex;
     flex-direction: column;
@@ -23,7 +25,9 @@ div input{
 }
 
 .right-content{
-    width: 40%;
+    width: 55%;
+    display: flex;
+    justify-content: center;
 }
 
 .button-align-right{

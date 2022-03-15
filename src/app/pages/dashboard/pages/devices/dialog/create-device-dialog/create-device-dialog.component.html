@@ -24,11 +24,11 @@
                 </div>
 
                 <div class="button-align-right">
-                    <button nbButton status="primary">Create</button>
+                    <button nbButton status="primary" (click)="createClick()">Create</button>
                 </div>
             </div>
-            <div class="right-content">
-                <img src="https://img.vn/uploads/version/img24-png-20190726133727cbvncjKzsQ.png">
+            <div nbPopover="Scan this QR for connect your device" nbPopoverTrigger="noop"  class="right-content">
+                <qrcode [qrdata]="this.qrCodeString" [width]="400" [errorCorrectionLevel]="'M'"></qrcode>
             </div>
         </div>
     </nb-card-body>
