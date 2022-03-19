@@ -40,7 +40,7 @@ export class CreateDeviceDialogComponent implements OnInit {
     let device: Device = {
       name: this.deviceCreateFromGroup.get('nameControl')!.value,
       location: this.deviceCreateFromGroup.get("locationControl")!.value,
-      tag: this.deviceCreateFromGroup.get("tagControl")!.value
+      tags: Array.from(this.trees),
     }
     this.deviceService.createDevice(device).subscribe(value => {
       this.qrCodeString = JSON.stringify(value)
