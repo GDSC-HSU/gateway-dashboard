@@ -21,21 +21,28 @@ import { AuthService } from '../auth/auth.service';
 export class DeviceService {
   prefix = "/device";
   deviceStatusCollection: CollectionReference<DocumentData>;
+
+  isLoadingGetDevice: boolean = false;
+
   devices: Array<Device> = [];
-  renderUIDeviceStatus: Function = () => {};
-  renderUIDeviceStatistics: Function = () => {};
+  renderUIDeviceStatus: Function = () => { };
+  renderUIDeviceStatistics: Function = () => { };
 
   constructor(private http: HttpClient, private authService: AuthService, private fireStore: Firestore) {
     this.deviceStatusCollection = collection(this.fireStore, 'device_status');
   }
 
   getDevices() {
+    this.isLoadingGetDevice = true;
     this.http.get<Array<Device>>(environment.endpoint + this.prefix, {
       headers: {
         "token": this.authService.token,
         "api-x-key": environment.apiKey,
       }
-    }).subscribe(value => this.devices = value);
+    }).subscribe(value => {
+      this.devices = value;
+      this.isLoadingGetDevice = false;
+    });
   }
 
   listenStatus(did: string) {
@@ -61,7 +68,7 @@ export class DeviceService {
     let deviceDocument = doc(this.deviceStatusCollection, did);
     getDoc(deviceDocument).then(value => {
       if (value.data()) {
-        this.listenStatus(did);  
+        this.listenStatus(did);
       } else {
         let device = this.devices.find(element => element.id == did);
         device!.status = DeviceStatus.created;
