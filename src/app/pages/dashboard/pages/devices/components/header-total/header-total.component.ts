@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { collection, DocumentData, onSnapshot, QueryDocumentSnapshot, QuerySnapshot } from 'firebase/firestore';
 import { DeviceStatus } from 'src/app/models/enums/device_status';
@@ -13,15 +13,17 @@ export class HeaderTotalComponent implements OnInit {
   totalConnect = 0;
   totalDisconnect = 0;
 
-  constructor(public deviceService: DeviceService, private fireStore: Firestore) { }
+  constructor(public deviceService: DeviceService, private fireStore: Firestore, private ref: ChangeDetectorRef) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.deviceService.renderUIDeviceStatistics = () => { this.ref.detectChanges(); }
+  }
 
-  countDeviceConnected(){
+  countDeviceConnected() {
     return this.deviceService.devices.filter(element => element.status == DeviceStatus.connected).length
   }
-  
-  countDeviceDisconnected(){
+
+  countDeviceDisconnected() {
     return this.deviceService.devices.filter(element => element.status == DeviceStatus.disconnected).length
   }
 }

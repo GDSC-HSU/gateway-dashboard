@@ -22,7 +22,8 @@ export class DeviceService {
   prefix = "/device";
   deviceStatusCollection: CollectionReference<DocumentData>;
   devices: Array<Device> = [];
-  renderUIDevice: Function = () => {};
+  renderUIDeviceStatus: Function = () => {};
+  renderUIDeviceStatistics: Function = () => {};
 
   constructor(private http: HttpClient, private authService: AuthService, private fireStore: Firestore) {
     this.deviceStatusCollection = collection(this.fireStore, 'device_status');
@@ -48,7 +49,8 @@ export class DeviceService {
         } else {
           device!.status = DeviceStatus.disconnected
         }
-        this.renderUIDevice();
+        this.renderUIDeviceStatus();
+        this.renderUIDeviceStatistics();
       },
       error: (err: FirestoreError) => console.error(err),
       complete: () => console.log('Observer got a complete notification'),
