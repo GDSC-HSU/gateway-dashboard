@@ -14,52 +14,31 @@ export class DeviceCardDetailComponent implements OnInit {
   @Input() device?: Device
   status: DeviceStatus = DeviceStatus.disconnected;
 
-  constructor(private deviceService: DeviceService, private ref: ChangeDetectorRef) { }
+  constructor(private deviceService: DeviceService) { }
 
   ngOnInit(): void {
     this.listenStatus();
   }
 
-  observerStatus = {
-    next: (value: DocumentSnapshot<DocumentData>) => {
-      let deviceStatus = value.data();
-      if (deviceStatus!["status"]) {
-        this.status = DeviceStatus.connected;
-      }
-      else {
-        this.status = DeviceStatus.disconnected;
-      }
-      this.ref.detectChanges();
-    },
-    error: (err: FirestoreError) => console.error(err),
-    complete: () => console.log('Observer got a complete notification'),
-  };
-
   listenStatus() {
-    this.deviceService.checkCreated(this.device!.id!).then(value => {
-      if (value.data()) {
-        let dataSnapshot = this.deviceService.listenStatus(this.device!.id!, this.observerStatus);
-      } else {
-        this.status = DeviceStatus.created;
-      }
-    })
+    this.deviceService.checkCreated(this.device!.id!);
   }
 
   getTextStatus() {
-    if (this.status == DeviceStatus.connected) {
+    if (this.device?.status == DeviceStatus.connected) {
       return "online";
     }
-    else if (this.status == DeviceStatus.disconnected) {
+    else if (this.device?.status == DeviceStatus.disconnected) {
       return "offline";
     }
     return "pending";
   }
 
   getStatus(){
-    if (this.status == DeviceStatus.connected) {
+    if (this.device?.status == DeviceStatus.connected) {
       return "success";
     }
-    else if (this.status == DeviceStatus.disconnected) {
+    else if (this.device?.status == DeviceStatus.disconnected) {
       return "danger";
     }
     return "warning";
