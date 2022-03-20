@@ -1,4 +1,4 @@
-<nb-card class="main-card-device">
+<nb-card [nbSpinner]="this.deviceService.isLoadingGetDevice" nbSpinnerStatus="primary" class="main-card-device">
     <nb-card-header>
         <div class="main-card-device-header">
             <div class="title-card">
@@ -6,7 +6,7 @@
                     Devices
                 </b>
             </div>
-            <button nbButton status="primary">
+            <button (click)="this.openAddNewDialog()" nbButton status="primary">
                 <nb-icon icon="plus-outline"></nb-icon>
                 new device
             </button>

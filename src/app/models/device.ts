@@ -1,3 +1,5 @@
+import { DeviceStatus } from "./enums/device_status";
+
 export interface Device {
     id?: string,
     accessKey?: string,
@@ -5,5 +7,7 @@ export interface Device {
     name?: string,
     location?: string,
     hardwareInfo?: JSON,
-    tag?: Array<string>;
+    tags?: Array<string>;
+    status?: DeviceStatus;
+    timestampUpdate?: string;
 }

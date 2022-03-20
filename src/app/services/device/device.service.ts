@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { ChangeDetectorRef, Injectable } from '@angular/core';
 import {
   Firestore,
   collection,
@@ -8,12 +8,10 @@ import {
   DocumentData,
   CollectionReference,
   getDoc,
-  DocumentSnapshot,
-  query,
-  QuerySnapshot
+  FirestoreError
 } from '@angular/fire/firestore';
-import { Observer } from 'rxjs';
 import { Device } from 'src/app/models/device';
+import { DeviceStatus } from 'src/app/models/enums/device_status';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
 
@@ -23,30 +21,67 @@ import { AuthService } from '../auth/auth.service';
 export class DeviceService {
   prefix = "/device";
   deviceStatusCollection: CollectionReference<DocumentData>;
+
+  isLoadingGetDevice: boolean = false;
+
   devices: Array<Device> = [];
+  renderUIDeviceStatus: Function = () => { };
+  renderUIDeviceStatistics: Function = () => { };
 
   constructor(private http: HttpClient, private authService: AuthService, private fireStore: Firestore) {
     this.deviceStatusCollection = collection(this.fireStore, 'device_status');
   }
 
   getDevices() {
-    return this.http.get<Array<Device>>(environment.endpoint + this.prefix, {
+    this.isLoadingGetDevice = true;
+    this.http.get<Array<Device>>(environment.endpoint + this.prefix, {
       headers: {
         "token": this.authService.token,
         "api-x-key": environment.apiKey,
       }
+    }).subscribe(value => {
+      this.devices = value;
+      this.isLoadingGetDevice = false;
     });
   }
 
-  listenStatus(did: string, observer: Observer<DocumentSnapshot<DocumentData>>) {
+  listenStatus(did: string) {
     let deviceDocument = doc(this.deviceStatusCollection, did);
-    onSnapshot(deviceDocument, observer);
+    onSnapshot(deviceDocument, {
+      next: (value) => {
+        let deviceStatus = value.data();
+        let device = this.devices.find(element => element.id == did);
+        if (deviceStatus!["status"]) {
+          device!.status = DeviceStatus.connected
+        } else {
+          device!.status = DeviceStatus.disconnected
+        }
+        this.renderUIDeviceStatus();
+        this.renderUIDeviceStatistics();
+      },
+      error: (err: FirestoreError) => console.error(err),
+      complete: () => console.log('Observer got a complete notification'),
+    });
   }
 
   checkCreated(did: string) {
     let deviceDocument = doc(this.deviceStatusCollection, did);
-    return getDoc(deviceDocument);
+    getDoc(deviceDocument).then(value => {
+      if (value.data()) {
+        this.listenStatus(did);
+      } else {
+        let device = this.devices.find(element => element.id == did);
+        device!.status = DeviceStatus.created;
+      }
+    });
   }
-  
-  createDevice() { }
+
+  createDevice(device: Device) {
+    return this.http.post(environment.endpoint + this.prefix + "/did-new", device, {
+      headers: {
+        "token": this.authService.token,
+        "api-x-key": environment.apiKey,
+      },
+    })
+  }
 }

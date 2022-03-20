@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DeviceService } from 'src/app/services/device/device.service';
 
 @Component({
@@ -15,9 +15,7 @@ export class DevicesComponent implements OnInit {
   }
 
   getAllDevices() {
-    this.deviceService.getDevices().subscribe(value => {
-      this.deviceService.devices = value;
-    })
+    this.deviceService.getDevices();
   }
 
 }
