@@ -1,0 +1,27 @@
+
+button{
+    background-color: white !important;
+    color: black !important;
+}
+
+.log-header{
+    display: flex; 
+    justify-content: space-between;
+}
+.log-card{
+    width: 100%;
+    height: 13vh;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.log-info{
+    display: flex;
+    justify-content: space-between;
+}
+
+h6{
+    text-align:center;
+    margin: 0;
+}
