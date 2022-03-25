@@ -1,10 +1,10 @@
 <div class="log-card">
 
     <div class="log-header">
-        <h6>{{getTime()}}</h6>
+        <p>{{getTime()}}</p>
         <div>
             <button size="small" nbButton outline status="info">
-                <nb-icon icon="hash"></nb-icon>{{this.log.did}}
+                <nb-icon icon="hash"></nb-icon>{{this.log.did.substring(0,10)}}
             </button>
         </div>
     </div>
