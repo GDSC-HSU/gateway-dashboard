@@ -1,22 +1,33 @@
-<div class="log-card" >
-    
+<div class="log-card">
+
     <div class="log-header">
-            <h6>12:30:20 07/03/2022</h6>
+        <h6>{{getTime()}}</h6>
         <div>
-            <button size="small" nbButton outline status="info"><nb-icon icon="hash"></nb-icon>pzwOejNVuf</button>
+            <button size="small" nbButton outline status="info">
+                <nb-icon icon="hash"></nb-icon>{{this.log.did}}
+            </button>
         </div>
     </div>
-    
+
     <div>
-        <nb-icon icon="pin-outline"></nb-icon> Gate 1
+        <nb-icon icon="pin-outline"></nb-icon> {{getLocation()}}
     </div>
-    
+
     <div class="log-info">
         <div>
-            Complete: <nb-icon status="success" icon="checkmark-outline"></nb-icon>
+            Complete: 
+            <nb-icon *ngIf="this.log.isComplete" status="success" icon="checkmark-outline"></nb-icon>
+            <nb-icon *ngIf="!this.log.isComplete" status="danger" icon="close-outline"></nb-icon>
         </div>
-        <div>MaskFace: <nb-icon status="success" icon="checkmark-outline"></nb-icon></div>
-        <div><nb-icon status="primary" icon="thermometer-outline"></nb-icon> 30 </div>
-        <div> <nb-icon status="primary" icon="credit-card-outline"></nb-icon> QR </div>
+        <div>MaskFace:
+            <nb-icon *ngIf="this.log.faceMask" status="success" icon="checkmark-outline"></nb-icon>
+            <nb-icon *ngIf="!this.log.faceMask" status="danger" icon="close-outline"></nb-icon>
+        </div>
+        <div>
+            <nb-icon status="primary" icon="thermometer-outline"></nb-icon> {{this.log.bodyTemperature}}
+        </div>
+        <div>
+            <nb-icon status="primary" icon="credit-card-outline"></nb-icon> QR
+        </div>
     </div>
 </div>
