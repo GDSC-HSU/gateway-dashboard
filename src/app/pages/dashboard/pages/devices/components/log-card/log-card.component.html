@@ -1,0 +1,33 @@
+<div class="log-card">
+
+    <div class="log-header">
+        <p>{{getTime()}}</p>
+        <div>
+            <button size="small" nbButton outline status="info">
+                <nb-icon icon="hash"></nb-icon>{{this.log.did.substring(0,10)}}
+            </button>
+        </div>
+    </div>
+
+    <div>
+        <nb-icon icon="pin-outline"></nb-icon> {{getLocation()}}
+    </div>
+
+    <div class="log-info">
+        <div>
+            Complete: 
+            <nb-icon *ngIf="this.log.isComplete" status="success" icon="checkmark-outline"></nb-icon>
+            <nb-icon *ngIf="!this.log.isComplete" status="danger" icon="close-outline"></nb-icon>
+        </div>
+        <div>MaskFace:
+            <nb-icon *ngIf="this.log.faceMask" status="success" icon="checkmark-outline"></nb-icon>
+            <nb-icon *ngIf="!this.log.faceMask" status="danger" icon="close-outline"></nb-icon>
+        </div>
+        <div>
+            <nb-icon status="primary" icon="thermometer-outline"></nb-icon> {{this.log.bodyTemperature}}
+        </div>
+        <div>
+            <nb-icon status="primary" icon="credit-card-outline"></nb-icon> QR
+        </div>
+    </div>
+</div>

@@ -1,5 +1,15 @@
 <nb-card>
-    <nb-card-header>
-        <b>Watch Logs</b>
-    </nb-card-header>
+  <nb-card-header>
+    <h5>Watch Logs</h5>
+  </nb-card-header>
+
+
+    <div #scrollMe id="log-body-custom">
+      <div class="log-div" *ngFor="let log of this.logService.logArray">
+        <app-log-card [log]="log"></app-log-card>
+      </div>
+    </div>
+
+
+
 </nb-card>

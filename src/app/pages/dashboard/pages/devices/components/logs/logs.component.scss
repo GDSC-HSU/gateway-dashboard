@@ -1,6 +1,35 @@
-::ng-deep{
-    nb-card{
-        margin: 0;
-        height: 100%;
-    }
+
+nb-card {
+    margin: 0;
+    height: 76.5vh;
+}
+
+nb-list-item {
+    display: inline !important;
+}
+
+#log-body-custom {
+    overflow-y: scroll;
+    padding: 16px 24px;
+}
+
+.log-div{
+    border-bottom: 2px solid #edf1f7;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: #f8f9fd;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #f8f9fd;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #e4e9f1;
 }
