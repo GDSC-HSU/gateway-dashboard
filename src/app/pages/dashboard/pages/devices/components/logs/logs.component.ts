@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { LogService } from 'src/app/services/log/log.service';
+import { OrganizationService } from 'src/app/services/organization/organization.service';
 
 @Component({
   selector: 'app-logs',
@@ -8,11 +9,14 @@ import { LogService } from 'src/app/services/log/log.service';
 })
 export class LogsComponent implements OnInit {
   @ViewChild('scrollMe') private myScrollContainer!: ElementRef;
-  constructor(public logService: LogService, private ref: ChangeDetectorRef) { }
+  constructor(public logService: LogService, private organizationService: OrganizationService, private ref: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.logService.renderLogUI = () => { this.ref.detectChanges() }
-    this.logService.getLog("nextword");
+    this.logService.renderLogUI = () => { this.ref.detectChanges() };
+    this.organizationService.getOrganization().subscribe(org => {
+      this.logService.getLog(org.id);
+    });
+
   }
 
   ngAfterViewChecked() {
