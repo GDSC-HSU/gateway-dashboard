@@ -18,7 +18,7 @@ export class LogCardComponent implements OnInit {
 
   getTime(){
     let time = new Date(this.log.timestamp)
-    let myTimeParse = `${this.padTime(time.getHours())}:${this.padTime(time.getMinutes())}:${this.padTime(time.getSeconds())} ${this.padTime(time.getDay())}/${this.padTime(time.getMonth())}/${time.getFullYear()}`
+    let myTimeParse = `${this.padTime(time.getHours())}:${this.padTime(time.getMinutes())}:${this.padTime(time.getSeconds())} ${this.padTime(time.getDate())}/${this.padTime(time.getMonth()+1)}/${time.getFullYear()}`
     return myTimeParse;
   }
 
@@ -28,5 +28,9 @@ export class LogCardComponent implements OnInit {
   
   getLocation(){
     return this.deviceService.devices.find(element => element.id == this.log.did)?.location!;
+  }
+
+  getMethod(){
+    return this.log.covidIdentification.identificationMethod;
   }
 }

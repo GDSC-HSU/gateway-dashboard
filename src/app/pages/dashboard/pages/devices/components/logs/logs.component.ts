@@ -16,7 +16,6 @@ export class LogsComponent implements OnInit {
     this.organizationService.getOrganization().subscribe(org => {
       this.logService.getLog(org.id);
     });
-
   }
 
   ngAfterViewChecked() {
