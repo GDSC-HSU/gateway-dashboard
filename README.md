@@ -24,9 +24,9 @@ This project is open-source, you can use our system or self-host for your organi
 
 ![Dashboard](docs/img/dashboard.JPG) 
 # With self-host
-## Development server
+## Development
 
-First you need to clone this project to your local machine or your server, and you should have register a firebase project and create web, you can follow this [link]( https://firebase.google.com/docs/web/setup?authuser=0&hl=en)
+First you need to clone this project to your local machine, and you should have register a firebase project and create web, you can follow this [link]( https://firebase.google.com/docs/web/setup?authuser=0&hl=en)
 
 
 ```git clone https://github.com/GDSC-HSU/gateway-dashboard``` 
