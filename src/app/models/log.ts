@@ -2,7 +2,7 @@ export interface Log{
     did: string,
     bodyTemperature: number,
     faceMask: boolean,
-    covidIdentification: JSON,
+    covidIdentification: any,
     isComplete: boolean,
     timestamp: number,
 }
