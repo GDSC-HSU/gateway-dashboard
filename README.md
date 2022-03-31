@@ -41,7 +41,7 @@ You can use our product in here: **[https://gdsc-gateway.web.app](https://gdsc-g
 
 ## With our system
 
-If you just want to use device and you want don't care about hosting web dashboard and backend server you can use our system:
+If you just want to use device and you don't want to care about hosting web dashboard or backend server you can use our system:
 
 **[https://gdsc-gateway.web.app](https://gdsc-gateway.web.app)**
 ## With self-host
