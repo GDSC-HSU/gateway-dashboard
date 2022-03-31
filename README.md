@@ -27,7 +27,7 @@ You can use our product in here: **[https://gdsc-gateway.web.app](https://gdsc-g
     * Update information of organization ❌ (coming soon)
 * Manage your device
     * View list device (info of device and realtime status) ✔
-    * Create device and able to real device connect ✔
+    * Create device and able to connect real device ✔
 * Satisfy data
     * View total status of device (connected, disconnected) ✔
     * View log realtime, information log include: device id, time, check complete, check mask, check temp, verify method (QR, RFID) ✔ 
