@@ -19,7 +19,7 @@ export class OrganizationService {
 
   getOrganization() {
     return this.http.get<Organization>(environment.endpoint + this.prefix, {
-      headers: { "token": this.authService.token },
+      headers: { "token": this.authService.token,  "api-x-key": "123" },
     });
   }
   
