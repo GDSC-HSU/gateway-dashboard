@@ -12,14 +12,10 @@ export class LogsComponent implements OnInit {
   constructor(public logService: LogService, private organizationService: OrganizationService, private ref: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.logService.renderLogUI = () => { this.ref.detectChanges() };
+    this.logService.renderLogUI = () => { this.ref.detectChanges(); this.scrollToBottom(); };
     this.organizationService.getOrganization().subscribe(org => {
       this.logService.getLog(org.id);
     });
-  }
-
-  ngAfterViewChecked() {
-    this.scrollToBottom();
   }
 
   scrollToBottom(): void {
