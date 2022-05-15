@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { OrganizationService } from 'src/app/services/organization/organization.service';
+import { LottieModule } from 'ngx-lottie';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { OrganizationService } from 'src/app/services/organization/organization.
     NbSpinnerModule,
     NbIconModule,
     NbPopoverModule,
+    LottieModule
   ],
 })
 export class LoginModule { }

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NbToastrService } from '@nebular/theme';
+import { AnimationOptions } from 'ngx-lottie';
 import { firstValueFrom } from 'rxjs';
 import { LoginPageConstraintText } from 'src/app/contraints/text/loginpage.constraint.text';
 import { AppUser } from 'src/app/models/app-user';
@@ -30,6 +31,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  options: AnimationOptions = {
+    path: '../../assets/lottie/research.json',
+  };
 
   isLoading: boolean = false;
   isRegisterTab = false;
